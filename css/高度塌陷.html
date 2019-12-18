@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0px; padding:0px;}
+        /* 父元素不能设置高度 ，不然内容溢出*/
+        .outer {
+            border: 10px red solid;
+            /* 
+                BFC（Block Formatting Context） 块级格式化环境，开启BFC该元素会变成一个独立的布局区域
+                元素开启BFC后的特点：
+                    1、开启BFC的元素不会被浮动元素所覆盖
+                        相邻两个元素如果前者设置了float，后者设置overflow，则呈现的结果是两个元素并排显示，后者并没有被前者覆盖
+                    2、子元素和父元素外边距不会重叠
+                    3、元素可以包含浮动的子元素
+                解决方法：
+                    1、设置元素float
+                    2、将元素设置为行内快元素
+                    前两种都会导致宽度消失，不推荐
+                    3、将元素的overflow设置为一个非visible的值
+             */
+             /* height: 400px;
+             width: 500px; */
+             /* background-color: red; */
+             /* float:left; */
+             /* display: inline-block; */
+             /* overflow: hidden; */
+             /* margin-top: 50px; */
+        }
+        /* 在子元素中设置宽高，这样父元素就会跟着子元素的内容的高度增加而增加 */
+        .inner {
+            height: 400px;
+            width: 100px;
+            background-color: #bfa;
+            /* 如果设置子元素float，则会产生高度塌陷的问题，即子元素从父元素文档流脱离，
+                导致父元素的高度丢失，其下的元素会自动上移
+             */
+             /* border: 5px blue solid; */
+             /* margin-top: 100px; */
+            float:left;
+        }
+        .bottom {
+            width: 100px;
+            height: 100px;
+            background-color: #666666;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inner">
+
+        </div>
+    </div>
+    <div class="bottom">
+
+    </div>
+</body>
+</html>
