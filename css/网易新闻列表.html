@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(52, 216, 11);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .news-wrapper {
+            height: 358px;
+            width: 300px;
+            background-color: #fff;
+            /* 左右居中*/
+            /* margin: 50px auto;   */
+            margin: 50px;
+            border-top: 1px rgb(20, 20, 20) solid;
+        }
+
+        .news-title {
+            display: inline-block;
+            height: 40px;
+            border-top: 1px red solid;
+            line-height: 40px;
+            margin-top: -1px;
+        }
+
+        /* .news-title a {
+            font-weight: bold;
+        } */
+        .news-img {
+            height: 150px;
+        }
+
+        .news-img .img-title {
+            margin-top: -40px;
+            color: #dddddd;
+            height: 40px;
+            padding-left: 30px;
+        }
+        .news-img .img-title h3 {
+            font-size: 16px;
+        }
+        .news-wrapper .news-list {
+            margin-top: 12px;
+            /* 去除li前面的点 */
+            list-style: none;
+        }
+        .news-list li {
+            /* margin-bottom: 17px; */
+            height: 30px;
+            line-height: 30px;
+            padding-left: 15px;
+        }
+        /* .news-list li::before {
+            content: "·";
+            
+            font-size: 12px;
+        } */
+        .news-list li a {
+            font-size: 14px;
+            color: #0c0c0cea;
+        }
+        .news-list li a:hover {
+            color: red;
+        }
+        .outline {
+            margin-left: 20px;
+            width: 200px;
+            height: 200px;
+            background-color: #666666;
+            /* outline: red 10px solid; */
+            box-shadow: 10px 20px #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="news-wrapper">
+        <h2 class="news-title">
+            <a href="#">体育</a>
+        </h2>
+        <div class="news-img">
+            <a href="#">
+                <img src="./img/0cc09d5ec4d545328578973de3b02c90.webp" alt="">
+                <div class="img-title">
+                    <h3>
+                        费德勒首负迪米 扶额摇头大为不满</h3>
+                </div>
+
+            </a>
+        </div>
+        <ul class="news-list">
+            <li>
+                <a href="#">
+                    乔治:我爱LA 喜欢和LBJ一起打球
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    格林:3年前降薪就在等KD 特制T恤嘲讽LBJ
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    塔克4000双鞋让保罗羡慕嫉妒 乔丹被震惊
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    CBA下季新赛制:常规赛4组循环 增至46轮
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="outline">
+
+    </div>
+    hello
+</body>
+
+</html>
