@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box1 {
+            height: 200px;
+            width: 200px;
+            background-color: #555555;
+        }
+        .box2 {
+            height: 100px;
+            width: 100px;
+            background-color: #222222;
+            /* 
+                垂直外边距折叠：相邻的垂直外边距会被合并为一个外边距，margin值以较大的值为准 
+                这样的效果就是父元素也会跟着往下移动
+                垂直外边距折叠 包括兄弟元素 、父子元素，水平方向不会发生折叠
+                当有多个子元素时，只有第一个和最后一个元素和父元素的margin折叠（元素没有宽高的除外）
+            */
+            margin-top: 20px;
+        }
+        
+        .box3 {
+            height: 200px;
+            width: 200px;
+            background-color: #555555;
+        }
+        .box3::before {
+            content: "";
+            /* 解决垂直外边距折叠效果 */
+            display: table;
+        }
+
+        /* 既能解决垂直外边距折叠效果也能解决高度塌陷问题 */
+        .clearfix::before,
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .box4 {
+            height: 100px;
+            width: 100px;
+            background-color: #222222;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 垂直外边距折叠 -->
+    <div class="box1">
+        <div class="box2"></div>
+    </div>
+
+    <!-- 解决 -->
+    <div class="box3">
+        <div class="box4"></div>
+    </div>
+</body>
+</html>
