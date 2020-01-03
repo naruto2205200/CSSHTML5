@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box1 {
+            border:10px red solid;
+            /* overflow: hidden; 一般情况下这样就解决了高度塌陷问题，但是在一些情况下会有一定的副作用， */
+            /* overflow: hidden; */
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            float: left;
+        }
+        .box3 {
+            /* 
+                可以通过设置box3的clear: both; 属性来解决box1高度塌陷的问题
+                因为box2float之后，box1的高度会被box3撑开，所以box3此时就决定了box1的高度
+                这样可以完美的解决高度塌陷的问题
+                有问题：这样虽然可以解决高度塌陷的问题，但是会多出来一个div标签
+             */
+            clear: both;
+        }
+        /* 
+            利用伪元素 ::after 动态生成一个元素，并设置信息 
+            ::after 默认是一个行内元素
+            这样就不需要在页面上写死结构了，动态生成一个虚拟元素
+            也能达到解决高度塌陷的问题
+            这是最终解决方案
+        */
+        .box1::after {
+           content: "";
+           display: block;
+           clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <div class="box2"></div>
+        <!-- <div class="box3">
+        </div> -->
+    </div>
+</body>
+</html>
