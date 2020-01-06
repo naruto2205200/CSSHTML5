@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    
+    /* 
+        元素的位置相对于浏览器窗口是固定位置
+        即使窗口是滚动的它也不会移动： 
+        Fixed定位使元素脱离文档流，因此不占据空间
+        Fixed定位的元素和其他元素重叠，覆盖层级小于它的层级的元素
+    */
+    .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+    }
+    .box2 {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        position: fixed;
+        left: 100px;
+        top: 100px;
+    }
+    .box3 {
+        width: 200px;
+        height: 200px;
+        background-color: green;
+        
+    }
+    </style>
+</head>
+<body>
+    <div class="box1">1</div>
+    <div class="box2">2</div>
+    <div class="box3">3</div>
+</body>
+</html>
