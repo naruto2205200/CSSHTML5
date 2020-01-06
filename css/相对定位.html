@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            /* margin-left: 100px;
+            margin-top: -100px; */
+             /* 
+                相对定位元素的定位是相对其正常位置
+                移动相对定位元素，但它原本所占的空间不会改变
+                相对定位元素经常被用来作为绝对定位元素的容器块
+                相对定位会元素的层级（会覆盖、层级低的元素）
+                不会脱离文档流
+                相对定位不会改变元素性质（块元素还是块元素、行元素还是行元素）
+            */
+            position: relative;
+            left: 100px;
+            top: -100px;
+        }
+        .box3 {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+           
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">1</div>
+    <div class="box2">2</div>
+    <div class="box3">3</div>
+</body>
+</html>
