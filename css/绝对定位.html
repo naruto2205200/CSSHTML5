@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            /* 
+                绝对定位会脱离文档流，后面的元素会自动补位，块元素变为行内元素，内容撑开宽度
+                绝对定位会脱离文档流，因此不占据空间
+                绝对定位的元素的位置相对于最近的已定位父元素，如果元素没有已定位的父元素，那么它的位置相对于<html>:
+             */
+            position: absolute;
+            /* 如果不设置偏移量，元素的位置不会变化，还是在原来的位置 */
+            left: 100px;
+            top: 50px;
+        }
+        .box3 {
+            width: 200px;
+            height: 200px;
+            background-color: green;
+           
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">1</div>
+    <div class="box2">2</div>
+    <div class="box3">3</div>
+</body>
+</html>
