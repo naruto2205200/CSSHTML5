@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .img-list {
+            width: 590px;
+            height: 470px;
+            margin: 100px auto;
+            list-style: none;
+            position: relative;
+        }
+        .img-list li {
+            position: absolute;
+        }
+        /* 通过 z-index 来设置层级 */
+
+        .pointer {
+            position: absolute;
+            /* 置于最前端 */
+            z-index: 9999;
+            /* 配合父元素的相对定位，可以设置居于父元素内部进行绝对定位设置 */
+            bottom: 20px;
+            left: 60px;
+        }
+        .pointer a {
+            /* 元素向左浮动 */
+            float: left;
+            width: 10px;
+            height: 10px;
+            margin: 0 2px;
+            /* 设置成圆角边框 */
+            border-radius: 50%;
+            /* 设置背景颜色透明度 */
+            background-color: rgba(255, 255, 255, .4);
+            background-clip: content-box;
+            border: 2px solid transparent;
+        }
+        .pointer a.active ,
+        .pointer a:hover {
+            background-color: #fff;
+            background-color: rgba(255, 255, 255, .6);
+        }
+
+    </style>
+</head>
+<body>
+    <ul class="img-list">
+        <li>
+            <a href="javascript:;"  tag="">
+                <img src="img/JD/11a7fc323e56351d.jpg.webp" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;"  tag="">
+                <img src="img/JD/1426dbd52cc1923c.jpg.webp" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;"  tag="">
+                <img src="img/JD/18987b5e05393d63.jpg.webp" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;"  tag="">
+                <img src="img/JD/64960aa2b8b840c5.jpg.webp" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;"  tag="">
+                <img src="img/JD/93866fa7.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;"  tag="">
+                <img src="img/JD/9e9f83ab5b5a76dd.jpg.webp" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;"  tag="">
+                <img src="img/JD/b225612874a74bea.jpg.webp" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;"  tag="">
+                <img src="img/JD/c3ea429955a3cca2.jpg.webp" alt="">
+            </a>
+        </li>
+        <div class="pointer">
+            <a href="javascript:;" class="active"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </ul>
+</body>
+</html>
