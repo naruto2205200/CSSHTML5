@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="./myfont/css/all.css">
+    <style>
+        p {
+            /*
+                单位：
+                px：绝对值，页面按像素精确展示。显示大小和屏幕分辨率有关
+                em：相对值，相对于其父元素的字体大小，1em相当于其父元素的font-size的值，值不固定
+                    统一调节页面字体的大小很方便，如果页面中有多层嵌套的em则字体大小计算就很麻烦
+                rem：CSS3新增，相对的元素为<html>根元素，如果显式设置了根元素的font-size大小，其
+                    也会发生改变
+                浏览器下默认字体尺寸是16px
+            */
+            font-size: 40px;
+            color: red;
+            /* 字体 */
+            /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+        }
+        li {
+            list-style: none;
+        }
+        /* 利用伪元素批量设置图标字体 */
+        li::before {
+            /* \f1b0 是图标的编码，官网demo中查找 */
+            content: "\f1b0";
+            /* font-family 是css/all.css 下的字体 */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900; 
+            color: blue;
+        }
+        
+    </style>
+</head>
+<body>
+    <p>
+        今天天气不错
+    </p>
+    <p>
+        How are you today?
+    </p>
+    <!-- 图标字体
+        1、https://fontawesome.com/ 下载 Start For Free（中文版：http://www.fontawesome.com.cn/）
+        2、解压缩，把css和webfonts 两个文件夹复制到项目的指定位置
+        3、页面中导入 <link rel="stylesheet" href="./myfont/css/all.css">
+        4、指定位置出 class="fas fa-user"，fa-user 为图标的名称，需要在页面中查找直接复制过来就可以了，并且可以对图标的样式（大小、颜色等）进行修改
+    -->
+    <a href="javascript:;" class="fas fa-user" style="color: black;"></a>
+    <ul>
+        <li>锄禾日当午</li>
+        <li>汗滴禾下土</li>
+        <li>谁知盘中餐</li>
+        <li>粒粒皆辛苦</li>
+    </ul>
+</body>
+</html>
