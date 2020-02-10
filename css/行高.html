@@ -12,12 +12,15 @@
             border: 1px solid red;
             /* height 和 line-height 一致可以保持内容居中显示 */
             /* height: 110px;
-            line-height: 110px; */
+            /* line-height: 110px;   设置行高 ，行高默认是1.333*/
+            /* line-height: 2;  行高也可以设置成一个整数，相当于字体大小的整数倍，即fontsize的整数倍 */
         }
         p {
+            /* 字体框：每个字体都有一个框，font-size其实就是设置字体框的大小，内部字体肯定小于50px */
             font-size: 50px;
             border: 1px solid red;
             /* margin: 10px auto; */
+            /* 行高设置小于字体大小时，字体会溢出行高的范围 */
             /* line-height: 40px; */
         }
         a {
