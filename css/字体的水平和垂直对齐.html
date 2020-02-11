@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 500px;
+            border: 1px red solid;
+            /* 文本的水平对齐方式 */
+            text-align: center;
+            font-size: 50px;
+        }
+        div span {
+            font-size: 20px;
+            border: 1px blue solid;
+            /* 文本的垂直对齐方式 */
+            /* 顶部对齐，子元素的顶部和父元素的顶部对齐，还有bottom，底部对齐 */
+            /* vertical-align: top; */
+
+            /* 基线对齐：子元素基线和父元素基线对齐 */
+            /* vertical-align: baseline; */
+
+            /* vertical-align： 10px; 也可以直接指定值 */
+        }
+        p {
+            border: 1px red solid;
+        }
+        /* 
+            默认图片会以基线对齐，导致图片下方会有一点空白，
+            因此设置 vertical-align: top(bottom); top和bottom都可以*/
+        img {
+            vertical-align: top;
+        }
+        .txt {
+            /* 文本下方横线 */
+            /* text-decoration:underline; */
+
+            /* 文本上方横线 */
+            /* text-decoration: overline; */
+
+            /* 定义穿过文本的横线（IE不兼容） : 横线的位置 样式 颜色*/
+            text-decoration: line-through solid red;
+            
+        }
+        .whitespace {
+            /* 
+                默认。空白会被浏览器忽略。浏览器中多个空格默认会被合并为一个空格 
+                white-space: normal; 
+                空白会被浏览器保留。其行为方式类似 HTML 中的 <pre> 标签。多个空格会保留，显示效果是设置的效果 
+                white-space: pre;
+                文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。
+                white-space: nowrap;    
+            */
+
+            /* 下面四个属性一起设置可以实现超出内容显示 “...” 3个省略符号的效果，缺一不可 */
+            width: 200px;        
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        下一刻，在他的血肉间<span>绚烂的绽放。</span>
+    </div>
+    <p>
+        <img src="./img/0cc09d5ec4d545328578973de3b02c90.webp" alt="">
+    </p>
+    <span class="txt">
+        天气很好
+    </span>
+    <p class="whitespace">
+        This is some text. This is some text. This is some text.
+        This is some text. This is some text. This is some text.
+        This is some text. This is some text. This is some text.
+        This is some text. This is some text. This is some text.
+    </p>
+</body>
+</html>
