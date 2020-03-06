@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width:200px;
+            height:200px;
+            /* background-color: #324423; */
+            /* 渐变是图片，不是背景颜色 */
+
+            /* 创建一个线性渐变的 "图像"(从上到下) */
+            /* background-image: linear-gradient(red, yellow, blue); 多个终止色用逗号（,）隔开 */
+            /* 
+                to 可以指定渐变的方向，
+                to bottom right ： 从左上角到右下角的线性渐变
+            */
+            background-image: linear-gradient(to right,red, yellow, blue);
+
+            /* 渐变 透明度: */
+            /* background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); */
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+
+    </div>
+</body>
+</html>
