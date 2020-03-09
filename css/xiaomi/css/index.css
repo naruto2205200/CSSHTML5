@@ -1,0 +1,46 @@
+/* 首页样式 */
+.topbar-wrapper {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #333;
+}
+
+.service,.topbar-wrapper li {
+    
+    float: left;
+}
+.shop-cart,.user-info  {
+    float: right;
+}
+.topbar a {
+    font-size: 12px;
+    color: #b0b0b0;
+    display: block;
+}
+.topbar a:hover {
+    color: #FFFFFF;
+}
+
+.topbar .line {
+    font-size: 12px;
+    color: #424242;
+    margin: 0 8px;
+}
+.shop-cart {
+    margin-left: 26px;
+}
+.shop-cart a {
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #424242;
+    text-align: center;
+}
+.shop-cart:hover a {
+    color: #ff6700;
+    background-color: #ffffff;
+}
+.shop-cart i {
+    margin-right: 2px;
+}
