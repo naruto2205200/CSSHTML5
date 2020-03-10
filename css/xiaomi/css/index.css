@@ -11,16 +11,51 @@
     float: left;
 }
 
-.app .appcode {
-    width: 124px;
-    height: 148px;
-    background-color: #333333;
+.app {
+    position: relative;
+}
+.app:hover::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-top: none;
+    border-bottom-color: #fff;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /* display: none; */
 }
 
-.appcode img {
-    width: 90px;
-    margin: 0 17px;
+.app:hover .appcode {
+    display: block;
 }
+.app .appcode {
+    display: none;
+    width: 124px;
+    height: 148px;
+    line-height: 1px;
+    text-align: center;
+    background-color: #666666;
+    box-shadow: 0 0 10 rgba(0, 0, 0, .3);
+    position: absolute;
+    left: 22px;
+    margin-left: -60px;
+}
+
+
+.app .appcode img {
+    width: 90px;
+    margin: 17px;
+    /* margin-bottom: 30px; */
+}
+.app .appcode span {    
+    font-size: 14px;
+    color: #000;
+}
+
 
 .shop-cart,.user-info  {
     float: right;
