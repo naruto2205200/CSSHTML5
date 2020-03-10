@@ -10,6 +10,18 @@
     
     float: left;
 }
+
+.app .appcode {
+    width: 124px;
+    height: 148px;
+    background-color: #333333;
+}
+
+.appcode img {
+    width: 90px;
+    margin: 0 17px;
+}
+
 .shop-cart,.user-info  {
     float: right;
 }
@@ -44,3 +56,4 @@
 .shop-cart i {
     margin-right: 2px;
 }
+
