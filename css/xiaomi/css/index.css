@@ -92,3 +92,49 @@
     margin-right: 2px;
 }
 
+.header {
+    height: 100px;
+    background-color: #111111;
+    /* 溢出隐藏 */
+    overflow: hidden;
+}
+.header .logo {
+    float: left;
+    width: 55px;
+    height: 55px;
+    position: relative;
+    /* top: 50%; */
+    margin-top: 22px;
+    /* 溢出隐藏 */
+    overflow: hidden;
+}
+
+.header .logo a {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    /* transform: translateY(-50%); */
+    /* 背景设置的方式 */
+    /* background: #ff6700 url('../images/mi-logo.png') center; */
+    background-color: #ff6700; 
+    background-image: url('../images/mi-logo.png');
+    background-position: center;
+    left: 0;
+    /* 
+        transition 
+        过渡效果必须是在有效的值之间进行转换的，auto是没办法进行转换 
+    */
+    transition: left 0.3s;
+} 
+
+.header .logo .home {
+    left: -55px;
+    background-image: url('../images/mi-home.png');
+} 
+
+.header .logo:hover .mi {
+    left: 55px;
+}
+.header .logo:hover .home {
+    left: 0;
+}
