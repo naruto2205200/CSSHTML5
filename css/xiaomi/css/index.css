@@ -199,3 +199,49 @@
     border-top: 1px solid rgb(224, 224, 224);
     box-shadow: 0 5px 3px rgba(0, 0, 0, .2);
 }
+
+.search-wrapper {
+    width: 296px;
+    height: 50px;
+    background-color: #333333;
+    float: right;
+    margin-top: 25px;
+  
+}
+.search-wrapper .search-input {
+    box-sizing: border-box;
+    float: left;
+    padding: 0;
+    height: 50px;
+    border: none;
+    width: 244px;
+    padding: 0 10px;
+    font-size: 16px;
+    border: 1px solid rgb(224, 224, 224);
+    outline: none;
+}
+.search-wrapper .search-input:hover,
+.search-wrapper .search-input:hover + .search-btn {
+    border-color: #b0b0b0;
+}
+/* 轮廓线 */
+.search-wrapper .search-input:focus,
+.search-wrapper .search-input:focus + .search-btn {
+    /* outline: #ff6700 solid 1px; */
+    border-color: #ff6700;
+}
+.search-wrapper .search-btn {
+    float: left;
+    height: 50px;
+    width: 52px;
+    border:none;
+    color: #616161;
+    font-size: 16px;
+    border: 1px solid rgb(224, 224, 224);
+    border-left: none;
+}
+.search-wrapper .search-btn:hover {
+    background-color: #ff6700;
+    color: #FFFFFF;
+    border: none;
+} 
