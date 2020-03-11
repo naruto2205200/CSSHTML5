@@ -94,9 +94,7 @@
 
 .header {
     height: 100px;
-    background-color: #111111;
-    /* 溢出隐藏 */
-    overflow: hidden;
+  
 }
 .header .logo {
     float: left;
@@ -137,4 +135,67 @@
 }
 .header .logo:hover .home {
     left: 0;
+}
+.header-wrapper {
+    position: relative;
+}
+.header-wrapper .nav-wrapper {
+    margin-left: 7px;
+}
+.header-wrapper .nav-wrapper {
+    float: left;
+}
+.nav-wrapper li {
+    float: left;
+    /* margin-right: 20px; */
+    padding-right: 20px;
+}
+.nav-wrapper .nav {
+    /* width: 850px; */
+    height: 100px;
+    line-height: 100px;
+    background-color: #fff;
+    padding-left: 58px;
+ 
+}
+.nav-wrapper .nav a {
+    display: block;
+    /* height: 60px; */
+    /* margin-top: 10px; */
+    font-size: 16px;
+    color: #333;
+}
+.nav-wrapper .nav a:hover {
+    color: #ff6700;
+}
+.header-wrapper .nav-wrapper .all-goods {
+    visibility: hidden;
+}
+.header-wrapper .nav-wrapper .all-goods:hover{
+    color: #333;
+}
+
+/* 隐藏层的设定 */
+.goods-info {
+    width: 100%;
+    /* height: 228px; */
+    /* overflow: hidden; */
+    /* background-color: #888888; */
+    position: absolute;
+    left: 0;
+    top: 100px;
+    height: 0;
+    transition: height 0.3s;
+    /* 高优先级 ，确保不会被其他元素盖住*/
+    z-index: 9999;
+}
+/* 
+    由于优先级（都是类选择器，优先级相同，后面代码会覆盖前面的代码）的问题，
+    如果这里的代码放在上面代码之前，会被覆盖，所以必须放在上面代码之后
+*/
+.nav-wrapper  .show-goods:hover ~ .goods-info,
+.goods-info:hover {
+    height: 228px;
+    border-top: 1px solid rgb(224, 224, 224);
+    box-shadow: 0 5px 3px rgba(0, 0, 0, .2);
 }
