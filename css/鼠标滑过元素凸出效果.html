@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .outer {
+            width: 500px;
+            height: 500px;
+            background-color: #333333;
+            margin: 0 auto;
+            position: relative;
+        }
+        .inner {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: #fff;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        
+        .inner img {
+            /* transition: width 10s; */
+            width: 100%;
+        }
+        .inner:hover {
+            transform: translateY(-1px);
+            /* transition: width 4s; */
+            box-shadow: 0 3px 5px #ddd;
+        }
+
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background-color: #333333;
+            position: relative;
+        }
+        .box2 {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #966696;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            transition: all 0.8s;
+        }
+        .box2:hover {
+            /* width: 40px;
+            height: 40px; */
+            transform: translateY(-3px);
+            box-shadow: 0 0 5px 1px #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inner">
+            <a href="">
+                <img src="./img/f2be8082503dc006.jpg.webp" alt="">
+            </a>
+        </div>
+    </div>
+
+    <div class="box1">
+        <div class="box2">
+            
+        </div>
+    </div>
+</body>
+</html>
