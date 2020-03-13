@@ -36,13 +36,14 @@
     height: 0;
     line-height: 1px;
     text-align: center;
-    background-color: #666666;
+    background-color: #fff;
     box-shadow: 0 0 10 rgba(0, 0, 0, .3);
     position: absolute;
     left: 22px;
     margin-left: -60px;
     overflow: hidden;
     transition: height 0.3s;
+    z-index: 9999;
 }
 
 
@@ -351,4 +352,83 @@
 .banner .prev-next .next:hover {
     right: 0;
     background-position: -42px;
+}
+
+.ad {
+    /* background-color: red; */
+    height: 170px;
+    margin-top: 14px;
+}
+
+.ad .shortcat,
+.ad .ad-img,
+.ad li {
+    float: left;
+}
+
+.ad .shortcat {
+    width: 234px;
+    height: 168px;
+    background-color: #5f5750;
+    margin-right: 14px;
+    padding-top: 2px;
+}
+
+.ad .shortcat a {
+    display: block;
+    color: #cfccca;
+    height: 84px;
+    width: 76px;
+    font-size: 12px;
+    text-align: center;
+    /* line-height: 84px; */
+    overflow: hidden;
+}
+
+.ad .shortcat a:hover {
+    color: #fff;
+}
+.ad .shortcat li{
+    position: relative;
+}
+.ad .shortcat li::before,
+.ad .shortcat li::after {
+    position: absolute;
+    content: "";
+    background: #665e57;
+}
+.ad .shortcat li::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 64px;
+    height: 1px;
+    margin: 0 auto;
+}
+.ad .shortcat li::after {
+    top: 0;
+    bottom: 0;
+    left: 2px;
+    width: 1px;
+    height: 70px;
+    margin: auto 0;
+}
+/* i标签设置为block 之后，margin-top 和父元素 a 会出现外边距折叠效果，导致整体下移 */
+.ad .shortcat i {
+    display: block;
+    /* height: 14px; */
+    margin-top: 20px;
+    font-size: 20px;
+
+}
+.ad .ad-img li{
+    width: 316px;
+    margin-right: 15px;
+}
+.ad .ad-img li:last-child  {
+    margin: 0;
+}
+.ad .ad-img img {
+    width: 100%;
+    vertical-align: top;
 }

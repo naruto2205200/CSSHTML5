@@ -960,7 +960,7 @@ readers do not read off random characters that represent icons */
 .fa-clipboard-list:before {
   content: "\f46d"; }
 
-.fa-clock:before {
+.fa-fa-thumbs-o-up:before {
   content: "\f017"; }
 
 .fa-clone:before {
