@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: #444444;
+            margin: 0 auto;
+            /* transform 位移针对的是自身，并不会影响别的元素， */
+            transform: translateY(50%);
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: #999999;
+            margin: 0 auto;
+        }     
+        .box3 {
+            
+            background-color: #861010;
+
+            /* 这种水平垂直据方式如果在width和height没有设置且有内容时有缺陷（背景会铺满整个屏幕） */
+            position: absolute;
+            /* width: 100px;
+            height: 100px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto; */
+            /* 这时候可以使用下面的方式来实现水平垂直居中效果 */
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+
+        }     
+
+        .box4 {
+            width: 100px;
+            height: 100px;
+            background-color: #966696;
+            transition: all 0.3s;
+        }
+        .box4:hover {
+            /* width: 40px;
+            height: 40px; */
+            transform: translateY(-4px);
+            box-shadow: 0 0 10px 10px rgba(0, 0, 0, .3);
+        }
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+</body>
+</html>
