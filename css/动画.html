@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box1 {
+            width: 400px;        
+            height: 400px;
+            background-color: silver;
+            overflow: hidden;
+        }
+        .box1 div {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 100px;
+        }
+        .box2 {
+            background-color: #bfa;
+            animation: mymove 5s infinite;
+            animation-direction: alternate;
+            /* 
+                动画：animation: name duration timing-function delay iteration-count direction fill-mode;
+                animation-name : 动画名称
+                animation-duration ：定义动画完成一个周期需要多少秒或毫秒
+                animation-timing-function ：指定动画将如何完成一个周期。 也就是动画时序，动画从一套 CSS 样式变为另一套所用的时间
+                animation-delay ：定义动画等待多长时间开始。
+                animation-play-state：指定动画是否正在运行或已暂停
+                animation-iteration-count ：定义动画应该播放多少次。infinite：无限次
+                animation-direction ：定义是否循环交替反向播放动画
+                animation-fill-mode：属性规定当动画不播放时（当动画完成时，或当动画有一个延迟未开始播放时），要应用到元素的样式。
+             */
+        }
+        @keyframes mymove {
+            from {
+                margin-left: 0;
+            }
+            to {
+                margin-left: 200px;
+            }
+        }
+
+        .box3 {
+            width: 200px;
+            height: 260px;
+            background-color: #333333;
+            background-image:url("./img/u=1407325393,4073877246&fm=26&gp=0.jpg");
+            margin: 0 auto;
+            /* steps 表示分多少步完成效果 */
+            animation: run 1s steps(4) infinite;
+        }
+
+        @keyframes run {
+            from{
+                background-position: 0 0;
+            }
+
+            /* from 和 to 之间 可以设置 xx% 百分比进行更详细的设置：20%，50% 等等 */
+
+
+
+            /* -800px 为动画图片的宽度 */
+            to {
+                background-position: -800px 0;
+            }
+
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <div class="box2"></div>
+    </div>
+    <div class="box3">
+    </div>
+</body>
+</html>
