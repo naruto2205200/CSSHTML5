@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        ul {
+            width: 800px;
+            border: 10px solid red;
+            display: flex;
+        }
+        li {
+            width: 100px;
+            height: 100px;
+            background-color: #333;
+            font-size: 50px;
+            line-height: 100px;
+            text-align: center;
+            flex-grow: 1;
+        }
+        li:nth-child(2) {
+            background-color: blue;
+        }
+        li:nth-child(3) {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        弹性盒  flex 
+        flex 是 CSS 的又一种布局手段，主要用来代替float 来完成页面的布局，
+        特别是移动端，主要采用flex而不是float，页面采用float主要是考虑兼容性问题
+        flex 可以使元素具有弹性，让元素可以跟随页面的大小的改变而改变
+        要使用弹性盒，必须先将一个元素设置为弹性容器
+        通过display 来设置弹性容器
+        display:flex; 设置为块级的弹性容器
+        display:inline-flex; 设置为行内的弹性容器
+
+        弹性元素：之后弹性容器的子元素（直接子元素，不包含孙子元素之类的后代元素）才是弹性元素
+        
+        一个元素既可以是弹性容器，也可以同时是弹性元素 两者没有冲突
+
+        flex-direction：规定弹性容器中弹性元素的排序方式（设置在弹性容器中，不是弹性元素）
+            row; 水平从左向右排列
+            row-reverse; 水平从右向左排列 （贴着容器的right边）
+            column; 垂直方向从上而下排列
+            column-reverse;垂直方向从下而上排列（贴着容器的bottom边）
+
+        flex-basis: 规定弹性元素的初始长度
+        flex-wrap：规定flex容器是单行或者多行，内容超出时是否折行或折列
+
+        flex-grow：用于设置或检索弹性元素的扩展比率、伸展性。可以给每一个元素单独进行配置
+        flex-shrink： 属性指定了 flex 元素的收缩规则，flex 元素仅在默认宽度之和大于容器
+            的时候才会发生收缩，其收缩的大小是依据 flex-shrink 的值
+            设置为0 不会收缩，内容可能会溢出，
+            设置为1 表示等比例收缩
+            值越大 收缩的效果越明显
+
+
+    -->
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</body>
+</html>
