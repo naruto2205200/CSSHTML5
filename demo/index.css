@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+.w {
+    width:1260px;
+    height: 750px;
+    /* background: url("./images/timg.jpg") no-repeat; */
+    background: url("./images/backgroundimage.jpg") no-repeat;
+    background-position: center 0;
+    /* 背景图片大小布局
+    background-size: width height;
+    */
+    background-size: 100% auto; 
+    /* background-size: 100% 100%;  */
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+.main {
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 25%;
+    text-align: center;
+    /* 背景透明 */
+    background: rgba(0, 0, 0, .6);
+    padding: 20px  50px 0 50px;
+}
+.main .form {
+    margin-top: 20px;
+}
+.main .form .item input {
+    border: 0;
+    border-bottom: 2px solid #fff;
+    margin-top: 10px;
+    padding:5px 10px;
+    color: #fff;
+    /* 背景透明 */
+    background: rgba(0, 0, 0, 0);
+    font-size: 15px;
+}
+.main .form .item input:focus {
+    /* border: 0; */
+    /* border-color: red */
+    /* outline（轮廓）是绘制于元素周围的一条线，位于边框边缘的外围，可起到突出元素的作用 */
+    outline:none;
+} 
+.main .form > input {
+    margin-top: 20px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    /* 渐变色 */
+    background: #FF0099;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #493240, #FF0099);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #493240, #FF0099); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+} 
