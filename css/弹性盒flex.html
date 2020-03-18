@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .flex-test {
+            width: 800px;
+            border: 10px solid red;
+            display: flex;
+        }
+        .flex-test li {
+            width: 100px;
+            height: 100px;
+            background-color: #333;
+            font-size: 50px;
+            line-height: 100px;
+            text-align: center;
+            flex-grow: 1;
+        }
+        .flex-test li:nth-child(2) {
+            background-color: blue;
+        }
+        .flex-test li:nth-child(3) {
+            background-color: yellow;
+        }
+
+
+        .align-item-test {
+            display: flex;
+            width: 500px;
+            height: 800px;
+            border: 1px solid #548564;
+            /* flex-wrap:wrap; */
+            /* align-items: stretch; */
+            /* align-items: flex-start; */
+            align-items: flex-start;
+            align-content: space-between;
+        }
+        .align-item-test li {
+            width: 100px;
+            line-height: 100px;
+            background-color: #666666;
+            flex-shrink: 0;
+            
+        }
+        .align-item-test li:nth-child(1) {
+            align-self: flex-end;
+        }
+
+        .align-item-test li:nth-child(2){
+            background-color: #453561;
+        }
+        .align-item-test li:nth-child(3){
+            background-color: #115485;
+            align-self: flex-end;
+        }
+        .align-item-test li:nth-child(4){
+            background-color: #996855;
+        }
+        .align-item-test li:nth-child(5){
+            background-color: #336578;  
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        弹性盒  flex 
+        flex 是 CSS 的又一种布局手段，主要用来代替float 来完成页面的布局，
+        特别是移动端，主要采用flex而不是float，页面采用float主要是考虑兼容性问题
+        flex 可以使元素具有弹性，让元素可以跟随页面的大小的改变而改变
+        要使用弹性盒，必须先将一个元素设置为弹性容器
+        通过display 来设置弹性容器
+        display:flex; 设置为块级的弹性容器
+        display:inline-flex; 设置为行内的弹性容器
+
+        弹性元素：之后弹性容器的子元素（直接子元素，不包含孙子元素之类的后代元素）才是弹性元素
+        
+        一个元素既可以是弹性容器，也可以同时是弹性元素 两者没有冲突
+        flex: 1 1 auto;  缩写形式：flex: flex-grow flex-shrink flex-basis;
+
+        flex-direction：规定弹性容器中弹性元素的排序方式（设置在弹性容器中，不是弹性元素）
+            row; 水平从左向右排列
+            row-reverse; 水平从右向左排列 （贴着容器的right边）
+            column; 垂直方向从上而下排列
+            column-reverse;垂直方向从下而上排列（贴着容器的bottom边）
+        flex-flow 属性是 flex-direction 和 flex-wrap 属性的复合属性。
+            display:flex;
+            flex-flow:row-reverse wrap;
+        flex-basis: 规定弹性元素的初始长度，
+            如果主轴是横向则指定的是宽度，此时元素的width会失效
+            如果主轴是纵向则指定的是高度，此时元素的height会失效
+            默认是auto，以元素的设置为主
+        flex-wrap：规定flex容器是单行或者多行，内容超出时是否折行或折列
+            nowrap; 默认值。规定灵活的项目不拆行或不拆列。
+            wrap;   规定灵活的项目在必要的时候拆行或拆列。
+            wrap-reverse;	规定灵活的项目在必要的时候拆行或拆列，但是以相反的顺序。
+        
+        flex-grow：用于设置或检索弹性元素的扩展比率、伸展性。可以给每一个元素单独进行配置
+        flex-shrink： 属性指定了 flex 元素的收缩规则，flex 元素仅在默认宽度之和大于容器
+            的时候才会发生收缩，其收缩的大小是依据 flex-shrink 的值
+            设置为0 不会收缩，内容可能会溢出，
+            设置为1 表示等比例收缩
+            值越大 收缩的效果越明显
+        
+        justify-content:用于设置或检索弹性盒子元素在主轴（横轴,也就是水平方向）方向上的对齐方式。
+            flex-start;	默认值。项目位于容器的开头。
+            flex-end;	项目位于容器的结尾。	
+            center;	项目位于容器的中心，元素紧密排列，左右没有空隙。	
+            space-between;	项目位于各行之间留有空白的容器内。	
+            space-around;	项目位于各行之前、之间、之后都留有空白的容器内。
+
+        align-items: 属性定义flex子项在flex容器的垂直方向上的对齐方式。    
+            stretch; 默认值。元素被拉伸以适应容器。   
+            flex-start;元素位于容器的开头 元素不会拉伸
+            flex-end;元素位于容器的结尾。和flex-start 效果相反
+            center; 元素位于容器的中心，配合justify-content:center; 可以实现水平垂直居中效果
+            baseline; 基线对齐
+        align-content: 元素垂直方向上的空白空间（不包含内容区）的对齐方式。
+            stretch; 默认值。元素被拉伸以适应容器，空白空间被平分。   
+            flex-start;元素位于容器的开头 元素不会拉伸
+            flex-end;元素位于容器的结尾。和flex-start 效果相反
+            center; 元素位于容器的中心，配合justify-content:center; 可以实现水平垂直居中效果
+            space-between;元素位于各行之间留有空白的容器内。
+            space-around;元素位于各行之前、之间、之后都留有空白的容器内。
+         
+        align-self: 属性可重写灵活容器的 align-items 属性，就是可以单独覆盖某一项的align-items属性。    
+            属性注意点：如果设置了 flex-wrap:wrap; 折行，则折行的元素设置 align-self 好像不起作用
+
+        order 属性 设置或检索弹性盒模型对象的子元素出现的順序。。
+            order:2; 直接设置数值 排序的顺序，如果元素不是弹性盒对象的元素，则 order 属性不起作用。
+    -->
+    <ul class="flex-test">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+
+    <ul class="align-item-test">
+        <li>1</li>
+        <li>2
+            <div>2</div>
+        </li>
+        <li>3
+            <div>3</div>
+            <div>3</div>
+        </li>
+        <li>1</li>
+        <li>2
+            <div>2</div>
+        </li>
+    </ul>
+</body>
+</html>
