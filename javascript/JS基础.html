@@ -5,34 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        var a ="123";
-        var b = 123;
-        console.log(a==b);
-        console.log(typeof b);
-        console.log(typeof NaN);
-        var va;
-        console.log(va);
-        // console.log(va.toString());
-        var aa = true;
-        var bb = false;
-        console.log(aa.toString());
-        console.log(bb.toString());
-        console.log(Number("55"));
-        console.log(Number(true));
-        console.log(Number(false));
-        console.log(Number(""));
-        console.log(Number(null));
-        console.log(parseInt("155ss2"));
-        console.log(20/3);
-        console.log(20%3);
-        var str1 = "45";
-        var str2 = "a";
-        console.log(str1+str2);
-        console.log(str1+NaN);
-        console.log(2*NaN);
-        console.log(2-NaN);
-        console.log(2-undefined);
+        // var a ="123";
+        // var b = 123;
+        // console.log(a==b);
+        // console.log(typeof b);
+        // console.log(typeof NaN);
+        // var va;
+        // console.log(va);
+        // // console.log(va.toString());
+        // var aa = true;
+        // var bb = false;
+        // console.log(aa.toString());
+        // console.log(bb.toString());
+        // console.log(Number("55"));
+        // console.log(Number(true));
+        // console.log(Number(false));
+        // console.log(Number(""));
+        // console.log(Number(null));
+        // console.log(parseInt("155ss2"));
+        // console.log(20/3);
+        // console.log(20%3);
+        // var str1 = "45";
+        // var str2 = "a";
+        // console.log(str1+str2);
+        // console.log(str1+NaN);
+        // console.log(2*NaN);
+        // console.log(2-NaN);
+        // console.log(2-undefined);
+        // var b1 = null;
+        // var b2;
+        // var b3 = "";
+        // console.log(b1==true);
+        // console.log(b2==true);
+        // console.log(b3==true);
+        // console.log("11"<"5");
 
+        // 匿名函数，后面加 () 表示立即执行函数，只会执行一次，也可以传参
+        (function(){
+            console.log("hah");
+        })();
+        (function(a,b){
+            console.log(a+b);
+        })(123,234);
+
+
+        // for循环如果循环是一个对象，则 
+        var obj = {
+            name:"zhangsan",
+            age:12,
+            sex:1
+        }
+        for(var n in obj){
+            // n 表示的是属性名
+            console.log(n);
+            // obj[n] 可以取出对应属性的值
+            console.log(obj[n]);
+        }
+
+
+        // 全局变量 ，会作为window对象的属性来保存
+        var aa = 10;
+        console.log(window.aa); // window.aa 可以直接调用
+
+        // var声明的变量会在所有代码执行之前被声明，但不会被赋值，如果不使用var 则不会被声明提前
+        // 函数 function 也会被声明提前，不管写在哪里都可以直接调用
+        console.log(bbb);//此时 bbb 是 undefined
+        var bbb = 10;
+        function getbbbb(){
+            //函数内部同名变量如果使用var 来声明，则作用域只在函数内部，外部的同名变量的值不会改变
+            // 如果不用var声明，则会改变外部变量的值
+            var bbb = 20; //外部同名变量值不变
+            // bbb=20; 改变外部值
+            console.log(bbb);
+        }
+        getbbbb();
+        console.log(bbb)
+        //形参相当于函数内部声明了一个新的变量 var bbb; 需要注意
+        function getbbbb(bbb){
+            console.log(bbb);
+        }
+
+        // 根据函数调用的方式不同，this 指向的对象也不同
+            // 1、以函数的形式调用时，this永远都是指向window
+            // 2、以方法的形式调用时，this指向的是调用方法的那个对象
+        function fun(){
+            console.log(this);
+        }
+        fun(); //指向的是window
+        var obj = {
+            name:"haha",
+            show:fun
+        }
+        obj.show();//指向的是调用方法的对象，这里即obj对象
+
+        //调用有参方法时，如果不传参数，则参数默认都是 undefined
+        function createObj(name){
+            console.log(name);
+        }
+        createObj();
+
+        
     </script>
 </head>
 <body>

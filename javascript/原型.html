@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        // 原型对象 prototype
+        // 创建一个函数，解析器默认都会向函数加一个属性prototype，这个属性对应着我们所谓的原型对象
+        // 如果函数作为普通函数调用，prototype没有任何作用
+        // 如果以构造函数的形式调用时，创建的对象都会有一个prototype属性
+        // 访问时通过 __proto__ 来访问 前后都有两个下划线。这样下面的cla. __proto__ 等于MyClass.prototype
+        // 原型对象相当于一个公共的区域，所有同一个类的实例都可以访问到这个原型对象
+        // 可以将对象中的共有内容都设置到原型对象中  
+        // 当访问一个对象的属性或方法时，会先去对象自身中寻找，如果有则直接使用，如果没有则去原型对象中查找，如果找到直接使用
+        // 这样做的好处：将对象共有的属性或方法统一添加到原型对象中，就不用分别给每一个对象单独添加，也不会影响全局作用域，
+        // 这样就可以使每一个对象都具有这些属性和方法了
+        function MyClass(){
+            name:"sdf"
+        }
+        var cla = new MyClass();//这是构造方法的形式调用
+        
+        cla.a= 32;
+        console.log(MyClass.prototype);
+        console.log(cla.__proto__ == MyClass.prototype);
+        MyClass.prototype.a = 123;
+        console.log(cla.a);
+        // 使用 对象的 hasOwnProperty方法来检测是否对象自身含有该属性
+        console.log(cla.hasOwnProperty("age")); //返回false，因为cla本身没有age这个属性
+        cla.name = "2312";
+        console.log(cla.hasOwnProperty("name"));//返回true，cla有name属性
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
