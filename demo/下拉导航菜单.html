@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body {
+            /* background: url("../css/img/437612ff389c641d3e051e42f2da0cca.jpeg"); */
+            background-image: url("./images/backgroundimage.jpg");
+            background-size: cover;
+        }
+        .navbar {
+            width: 755px;
+            height: 50px;
+            background: #333;
+            box-shadow: 0 -2px 2px #000;
+            /* margin-top: 300px; */
+            margin: 300px auto 0 auto;
+          
+        }
+        .navbar ul li {
+            float: left;
+            width: 150px;
+            height: 50px;
+            background: #222222;
+            margin-right: 1px;
+            font-size: 14px;
+        }
+        .navbar ul li:hover {
+            color: #fff;
+            background: rgba(238, 82, 83, 1);
+            /* 2s后开始changeColor 动画 效果 */
+            animation: changeColor 2s infinite;
+            /* 等待3s之后开始动画 */
+            animation-delay: 3s;
+        }
+        @keyframes changeColor{
+            0%{background: #1d84b5;}
+            50%{background: #00cecb;}
+            100%{background: #1d84b5;}
+        }
+        .navbar ul li a {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            text-align: center;
+            line-height: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .navbar ul li ul li {
+            display: none;
+            width: 220px;
+            font-size: 10px;
+            float:initial;
+            background: rgba(1, 163, 164, .5);
+            /* 元素过度效果设定0.3s完成 */
+            transition: 0.3s;
+        }
+        .navbar ul li:hover ul li {
+            display: block;
+            border-top: 1px solid rgba(72, 219, 251, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li>
+                <a href="#">homepage</a>
+                <ul>
+                    <li><a href="#">homepage1</a></li>
+                    <li><a href="#">homepage2</a></li>
+                    <li><a href="#">homepage3</a></li>
+                    <li><a href="#">homepage4</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">products</a>
+                <ul>
+                    <li><a href="#">products1</a></li>
+                    <li><a href="#">products2</a></li>
+                    <li><a href="#">products3</a></li>
+                    <li><a href="#">products4</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">about</a>
+                <ul>
+                    <li><a href="#">about1</a></li>
+                    <li><a href="#">about2</a></li>
+                    <li><a href="#">about3</a></li>
+                    <li><a href="#">about4</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">feedback</a>
+                <ul>
+                    <li><a href="#">feedback1</a></li>
+                    <li><a href="#">feedback2</a></li>
+                    <li><a href="#">feedback3</a></li>
+                    <li><a href="#">feedback4</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">email</a>
+                <ul>
+                    <li><a href="#">email1</a></li>
+                    <li><a href="#">email2</a></li>
+                    <li><a href="#">email3</a></li>
+                    <li><a href="#">email4</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
