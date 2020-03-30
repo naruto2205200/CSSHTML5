@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            
+        }
+        .outer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #031321;
+            /* vh就是当前屏幕可见高度的1%，也就是说
+                height:100vh == height:100%;
+                但是有个好处是当元素没有内容时候，设置height:100%该元素不会被撑开，
+                但是设置height:100vh，该元素会被撑开屏幕高度一致。 */
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        a {
+            position: relative;
+            display: inline-block;
+            padding: 12px 36px;
+            margin: 10px 0;
+            text-decoration: none;
+            font-size: 18px;
+            color: #ffffff;
+            /* 字符间距 */
+            letter-spacing: 2px;
+            /* 边框圆角 */
+            border-radius: 40px;
+            /* 背景渐变 */
+            background: linear-gradient(90deg,#0162c8,#55e7fc);
+            /* 转大写 */
+            text-transform: uppercase;
+            /* 溢出隐藏 */
+            overflow: hidden;
+        }
+        a:nth-child(2){
+            /* 背景渐变 */
+            background: linear-gradient(90deg,#755bea,#ff72c0);
+        }
+        span {
+            position: absolute;
+            background: #fff;
+            /* x和y轴 位移 */
+            transform: translate(-50%,-50%);
+            pointer-events: none;
+            border-radius: 50px;
+            animation: animate 1s linear infinite;
+        }
+        @keyframes animate {
+            /* opacity 不透明性，用来设置透明度 ，0 表示完全透明 */
+            0% {width: 0px;height: 0px;opacity: 0.5;}
+            100%{width: 500px;height: 500px;opacity:0;}
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <a href="#">Button</a>
+        <a href="#">Button</a>
+    </div>
+    <script type="text/javascript">
+        const buttons = document.querySelectorAll('a');
+        buttons.forEach(btn=>{
+            btn.addEventListener('click',function(e){
+                // clientX和clientY    取的是鼠标点击的、相对于浏览器文档的坐标，是变动的
+                // e.target.offsetLeft 和e.target.offsetTop 取的固定定位，不变，是这个固定范围的左上角离页面左上角的距离坐标
+                let x = e.clientX-e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+                let ripples = document.createElement('span');
+                //在鼠标点击位置动态生成一个span标签
+                ripples.style.left= x+'px';
+                ripples.style.top=y+'px';
+                this.appendChild(ripples);
+                setTimeout(() => {
+                    // 1秒后移出这个span标签
+                    ripples.remove();
+                }, 1000);
+            })
+        })
+    </script>
+</body>
+</html>
