@@ -13,6 +13,7 @@
             margin: 0;
             padding: 0;
             background-color: rgba(93, 93, 97, 0.4);
+            margin: 0 auto;
         }
         ul li {
             float: left;
@@ -22,15 +23,24 @@
             /* 转换为块元素 */
             display: block;
             font-size: 18px;
+          
             text-decoration: none;
             /* height 继承父元素的 height */
             line-height: 48px;
             padding: 0 39px;
+
+            /* width:200px;
+            text-align: center; 
+                这里的text-align:center; 需要配合width才起作用，因为a标签宽度
+                是随内容撑开的
+            */
         }
         ul li:last-child a {
             padding: 0 42px 0 41px;
         }
-      
+        a:hover {
+            background-color: #333333;
+        }
         /* .last{
             float: right;
             padding-right: 44px;

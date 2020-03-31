@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .outer {
+            width: 500px;
+            height: 350px;
+            background: #333333;
+            padding: 10px;
+            margin: 5px auto;
+            text-align: center;
+        }
+        img {
+            width: 490px;
+            height: 330px;
+        }
+    </style>
+    <script>
+        window.onload = function (){
+            var arr = ["../css/img/035176991f00348b8ede2808b7fff8ca.jpg","../css/img/095c656d40efc3364a0a3fbc13aa15b9.jpg","../css/img/832b5040b5621a7605de41be65a1d9c9.jpeg","../css/img/437612ff389c641d3e051e42f2da0cca.jpeg"];
+            var prevbtn = document.getElementById("prev");
+            var nextbtn = document.getElementById("next");
+            var img = document.getElementsByTagName("img")[0];
+            var arrIndex = 0;
+            prevbtn.onclick = function (){
+                if(arrIndex>0){
+                    arrIndex--;
+                    img.src = arr[arrIndex];
+                }
+            }
+            nextbtn.onclick = function (){
+                if(arrIndex<arr.length-1){
+                    arrIndex++;
+                    img.src = arr[arrIndex];
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="outer">
+        <img src="../css/img/035176991f00348b8ede2808b7fff8ca.jpg" alt="图片">
+        <button id="prev">上一页</button>
+        <button id="next">下一页</button>
+    </div>
+</body>
+</html>

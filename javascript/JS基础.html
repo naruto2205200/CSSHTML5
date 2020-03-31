@@ -41,73 +41,153 @@
         // console.log("11"<"5");
 
         // 匿名函数，后面加 () 表示立即执行函数，只会执行一次，也可以传参
-        (function(){
-            console.log("hah");
-        })();
-        (function(a,b){
-            console.log(a+b);
-        })(123,234);
+        // (function(){
+        //     console.log("hah");
+        // })();
+        // (function(a,b){
+        //     console.log(a+b);
+        // })(123,234);
 
 
-        // for循环如果循环是一个对象，则 
-        var obj = {
-            name:"zhangsan",
-            age:12,
-            sex:1
+        // // for循环如果循环是一个对象，则 
+        // var obj = {
+        //     name:"zhangsan",
+        //     age:12,
+        //     sex:1
+        // }
+        // for(var n in obj){
+        //     // n 表示的是属性名
+        //     console.log(n);
+        //     // obj[n] 可以取出对应属性的值
+        //     console.log(obj[n]);
+        // }
+
+
+        // // 全局变量 ，会作为window对象的属性来保存
+        // var aa = 10;
+        // console.log(window.aa); // window.aa 可以直接调用
+
+        // // var声明的变量会在所有代码执行之前被声明，但不会被赋值，如果不使用var 则不会被声明提前
+        // // 函数 function 也会被声明提前，不管写在哪里都可以直接调用
+        // console.log(bbb);//此时 bbb 是 undefined
+        // var bbb = 10;
+        // function getbbbb(){
+        //     //函数内部同名变量如果使用var 来声明，则作用域只在函数内部，外部的同名变量的值不会改变
+        //     // 如果不用var声明，则会改变外部变量的值
+        //     var bbb = 20; //外部同名变量值不变
+        //     // bbb=20; 改变外部值
+        //     console.log(bbb);
+        // }
+        // getbbbb();
+        // console.log(bbb)
+        // //形参相当于函数内部声明了一个新的变量 var bbb; 需要注意
+        // function getbbbb(bbb){
+        //     console.log(bbb);
+        // }
+
+        // // 根据函数调用的方式不同，this 指向的对象也不同
+        //     // 1、以函数的形式调用时，this永远都是指向window
+        //     // 2、以方法的形式调用时，this指向的是调用方法的那个对象
+        // function fun(){
+        //     console.log(this);
+        // }
+        // fun(); //指向的是window
+        // var obj = {
+        //     name:"haha",
+        //     show:fun
+        // }
+        // obj.show();//指向的是调用方法的对象，这里即obj对象
+
+        // //调用有参方法时，如果不传参数，则参数默认都是 undefined
+        // function createObj(name){
+        //     console.log(name);
+        // }
+        // createObj();
+        // 数组test
+        // 数组如果下标没有数据，不会报错，会返回undefined
+        // 数组中可以有不同类型的对象，可以是基本类型、object、function
+        // var arr = [12,23,43];
+        // var arr2 = [55,68,42,4];
+        // console.log(arr.join("+"));
+        // console.log(arr.indexOf(23));
+        // arr.forEach(function(a,b,c){
+        //     console.log(a+":"+b+":"+c);
+        // })
+        // slice 用于返回指定开始和结束坐标之间的元素（包头不包尾）
+        // var result = arr.slice(0,2);
+        // console.log(result);
+        // console.log(arr);   
+        // splice 可以删除数组指定坐标开始，指定数量的元素
+        // splice(startIndex,num); //两个参数用于删除元素
+        // splice(startIndex,num,元素,...);多个参数用于向数组添加元素，
+        // 如果第二个参数不是 0，则会删除对应数量的元素
+        // var fruits = ["Banana", "Orange", "Apple", "Mango"];
+        // fruits.splice(2,0,"Lemon","Kiwi");
+        // console.log(fruits);   
+        // console.log(fruits[5]==undefined)
+        // console.log(undefined)
+        // if(undefined){
+        //     console.log(1)
+        // }else{
+        //     console.log(2)
+        // }
+
+        window.onload = function() {
+            // var ss = document.getElementById("mydiv");
+            // console.log(ss.firstChild.nodeType);
+            //获取body标签元素
+            var body = document.body;
+            // 获取html 根标签元素
+            var html = document.documentElement;
+            var arr = document.getElementsByTagName("a");
+            console.log(typeof arr);
+            for(var i=0;i<arr.length;i++){
+                arr[i].onclick = function(){
+                    var ptr = this.parentNode.parentNode;
+
+                    console.log(ptr)
+                    ptr.parentNode.removeChild(ptr);
+                }
+                
+            }
+
+
+            // 获取样式
+            // getComputedStyle在IE8中没有，兼容性需要判断
+            // if(window.getComputedStyle) 不能去掉window，如果去掉，则表示查找getComputedStyle 这个对象，找不到会报错
+            // 加上window表示在window中查找这个属性，没有则返回undefined
+            function getStyle(obj,name){
+                if(window.getComputedStyle){
+                    return getComputedStyle(obj,null)[name];
+                }else{
+                    return obj.currentStyle[name];
+                }
+                return window.getComputedStyle?getComputedStyle(obj,null)[name]:obj.currentStyle[name];
+            }
         }
-        for(var n in obj){
-            // n 表示的是属性名
-            console.log(n);
-            // obj[n] 可以取出对应属性的值
-            console.log(obj[n]);
-        }
-
-
-        // 全局变量 ，会作为window对象的属性来保存
-        var aa = 10;
-        console.log(window.aa); // window.aa 可以直接调用
-
-        // var声明的变量会在所有代码执行之前被声明，但不会被赋值，如果不使用var 则不会被声明提前
-        // 函数 function 也会被声明提前，不管写在哪里都可以直接调用
-        console.log(bbb);//此时 bbb 是 undefined
-        var bbb = 10;
-        function getbbbb(){
-            //函数内部同名变量如果使用var 来声明，则作用域只在函数内部，外部的同名变量的值不会改变
-            // 如果不用var声明，则会改变外部变量的值
-            var bbb = 20; //外部同名变量值不变
-            // bbb=20; 改变外部值
-            console.log(bbb);
-        }
-        getbbbb();
-        console.log(bbb)
-        //形参相当于函数内部声明了一个新的变量 var bbb; 需要注意
-        function getbbbb(bbb){
-            console.log(bbb);
-        }
-
-        // 根据函数调用的方式不同，this 指向的对象也不同
-            // 1、以函数的形式调用时，this永远都是指向window
-            // 2、以方法的形式调用时，this指向的是调用方法的那个对象
-        function fun(){
-            console.log(this);
-        }
-        fun(); //指向的是window
-        var obj = {
-            name:"haha",
-            show:fun
-        }
-        obj.show();//指向的是调用方法的对象，这里即obj对象
-
-        //调用有参方法时，如果不传参数，则参数默认都是 undefined
-        function createObj(name){
-            console.log(name);
-        }
-        createObj();
-
-        
     </script>
 </head>
 <body>
-    
+    <div id="mydiv">
+        <ul>
+            <li>11</li>
+        </ul>
+    </div>
+    <table>
+        <tr>
+            <td>tin</td>
+            <td><a href="javascript:;"> delete</a></td>
+        </tr>
+        <tr>
+            <td>rng</td>
+            <td><a href="javascript:;"> delete</a></td>
+        </tr>
+        <tr>
+            <td>fpx</td>
+            <td><a href="javascript:;"> delete</a></td>
+        </tr>
+    </table>
+
+
 </body>
 </html>
