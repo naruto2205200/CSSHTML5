@@ -28,17 +28,40 @@
             var prevbtn = document.getElementById("prev");
             var nextbtn = document.getElementById("next");
             var img = document.getElementsByTagName("img")[0];
-            var arrIndex = 0;
+            var arrlength = arr.length;
+            var imgIndex = 0;
             prevbtn.onclick = function (){
-                if(arrIndex>0){
-                    arrIndex--;
-                    img.src = arr[arrIndex];
+                if(imgIndex>0){
+                    imgIndex--;
+                    img.src = arr[imgIndex];
                 }
             }
             nextbtn.onclick = function (){
-                if(arrIndex<arr.length-1){
-                    arrIndex++;
-                    img.src = arr[arrIndex];
+                if(imgIndex<arr.length-1){
+                    imgIndex++;
+                    img.src = arr[imgIndex];
+                }
+            }
+            // 增加定时器功能
+            var stopInterval= null;
+            var startBtn = document.getElementById("start");
+            startBtn.onclick = function(){
+                console.log(stopInterval);
+                if(!stopInterval){                   
+                    stopInterval = setInterval(function(){
+                        imgIndex++;
+                        if(imgIndex>=arrlength){
+                            imgIndex = 0;
+                        }
+                        img.src = arr[imgIndex];
+                    },2000)
+                }
+            }
+            var stopBtn = document.getElementById("stop");
+            stopBtn.onclick = function(){
+                if(stopInterval){
+                    clearInterval(stopInterval);
+                    stopInterval = null;
                 }
             }
         }
@@ -47,8 +70,10 @@
 <body>
     <div class="outer">
         <img src="../css/img/035176991f00348b8ede2808b7fff8ca.jpg" alt="图片">
+        <button id= "start">开始</button>
         <button id="prev">上一页</button>
         <button id="next">下一页</button>
+        <button id="stop">停止</button>
     </div>
 </body>
 </html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+         * BOM 
+         * 浏览器对象模型
+         * 通过js来操作浏览器
+         * BOM对象：
+         *      window：整个浏览器窗口，同时window也是网页中的全局对象
+         *      Navigator：代表当前浏览器的信息，通过该对象可以识别不同的浏览器
+         *      Location：对象用于获得当前页面的地址 (URL)，并把浏览器重定向到新的页面。
+         *          location = url;设置需要跳转的页面url
+         *          location.href; 返回当前页面url
+         *          location.assign(url);加载新的页面
+         *          location.reload();重新加载当前页面，如果传递一个参数 true ，则会强制清空缓存刷新页面
+         *          location.replace(url);使用新的页面替换当前页面，不会生成历史记录即无法返回上一页面
+         *      History：浏览器的历史信息，通过该对象来操作浏览器的历史信息
+         *          出于安全原因，只能操作浏览器的前进和后退，只对当次访问有效
+         * 
+         *          window.history.back(); 后退上一个页面
+         *          window.history.forward(); 前进
+         *          history.go(1); 前进
+         *          history.go(0);刷新页面
+         *          history.go(-1);后退上一个页面
+         *      Screen：用户的屏幕信息，可以获取用户的显示器的相关信息
+         * 
+         *      Timing 事件
+         *          setTimeout(function, milliseconds) 在等待指定的毫秒数后执行函数。
+         *              clearTimeout() 方法停止执行 setTimeout() 中规定的函数。
+         *          setInterval(function, milliseconds) 等同于 setTimeout()，但持续重复执行该函数。
+         *              clearInterval() 方法停止 setInterval() 方法中指定的函数的执行。
+         *              myVar = setInterval(function, milliseconds);
+         *              clearInterval(myVar);
+         * 
+         * 
+         * 
+         */
+        // console.log(location);
+        window.onload = function(){
+            var a = document.getElementById("mya");
+            a.onclick = function(){
+                location = "http://www.baidu.com";
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div id="example"></div>
+    <a href="javascript:;" id="mya">点我</a>
+</body>
+</html>

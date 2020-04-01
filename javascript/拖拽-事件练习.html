@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: #999999;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var box1 = document.getElementById("box1");
+            //鼠标按下
+            box1.onmousedown = function(){
+                // 鼠标移动
+                document.onmousemove = function(event){
+                    event = event || window.event;
+                    // console.log(event);
+                    // console.log(event.clientX +":"+event.clientY+":"+event.offsetX+":"+event.offsetY+":"+event.target.offsetLeft+":"+event.target.offsetTop);
+                    var left = event.clientX-event.offsetX+event.movementX;
+                    var top = event.clientY-event.offsetY+event.movementY;
+                    // console.log(left +":"+top+":"+event.clientX+":"+event.clientY+":"+event.offsetX+":"+event.offsetY);
+                    box1.style.left = left +"px";
+                    box1.style.top = top +"px";
+                };
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1">
+    </div> 
+</body>
+</html>

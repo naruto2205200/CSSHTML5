@@ -71,9 +71,14 @@
         buttons.forEach(btn=>{
             btn.addEventListener('click',function(e){
                 // clientX和clientY    取的是鼠标点击的、相对于浏览器文档的坐标，是变动的
-                // e.target.offsetLeft 和e.target.offsetTop 取的固定定位，不变，是这个固定范围的左上角离页面左上角的距离坐标
+                // e.target.offsetLeft 和e.target.offsetTop 取的固定定位即当前元素坐标，不会变动
+                // e.offsetX 和e.offsetY 是鼠标点击时，在元素内部的坐标，即居于当前元素的左侧和头部的距离
+                // e.offsetX 等价于 e.clientX-e.target.offsetLeft 
+                // e.offsetY 等价于 e.clientY - e.target.offsetTop
+                // console.log(e.offsetX+":"+e.target.offsetLeft+":"+e.offsetY+":"+e.target.offsetTop);
                 let x = e.clientX-e.target.offsetLeft;
                 let y = e.clientY - e.target.offsetTop;
+                // console.log(e.offsetX+":"+x +":"+e.offsetY+":"+y);
                 let ripples = document.createElement('span');
                 //在鼠标点击位置动态生成一个span标签
                 ripples.style.left= x+'px';

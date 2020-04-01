@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1 {
+            width: 200px;
+            height: 200px;
+            background-color: #999999;
+        }
+        #span1 {
+            color: red;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            // 事件冒泡：内部元素的事件触发之后，外部元素的相同事件也触发
+            // var s1 = document.getElementById("span1");
+            // s1.onclick = function(){
+            //     console.log("span的click");
+            //     //取消事件冒泡
+            //     event.cancelBubble = true;
+            // }
+
+            var box1 = document.getElementById("box1");
+            box1.onclick = function(){
+                console.log("div的click");
+                event.cancelBubble = true;
+            }
+
+            // var body1 = document.body;
+            // body1.onclick = function(){
+            //     console.log("body的click");
+            // }
+            // if(event.target.className == "link"){
+            //     console.log("click");
+            // }
+
+            var s1 = document.getElementById("span1");
+            //ie9及以上和其他浏览器用此事件
+            s1.addEventListener("click",function(){
+                console.log("click");
+                // 这里的this是绑定事件的对象
+                console.log(this);
+                event.cancelBubble = true;
+            },false);//这里设置为true时，事件会从外层向内层开始冒泡
+            // // IE8及以下浏览器用此方法，注意：事件前加 “on”
+            // s1.attachEvent("onclick",function(){
+            // 这里的this是window
+            //  console.log(this);
+
+            // });
+            // 事件绑定方法
+            function bind(obj,eventstr,callback){
+                if(obj.addEventListener){
+                    obj.addEventListener(eventstr,callback,false);
+                }else{
+                    // 利用匿名函数可以改变this的指向
+                    s1.attachEvent("on"+eventstr,function(){
+                        // 在匿名函数中调用回调函数
+                        callback.call(obj);
+                    });
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1">
+        box1
+        <span id="span1">span</span>
+    </div>
+
+</body>
+</html>

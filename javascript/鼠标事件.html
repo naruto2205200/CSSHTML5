@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 100px;
+            background-color: #586471;
+            position: relative;
+            left: 200px;
+            top: 200px;
+        }
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: #564854;
+            position: absolute;
+        }
+        p {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        function coordinates(event){
+            x=event.pageX; //距离body左侧边缘的距离
+            y=event.pageY; //距离body头部边缘的距离
+            // ie8 及以下版本 event默认不会传进来，需要window.event来获取
+            // 下面是两种方式
+            // if(!event){
+            //     event = window.event;
+            // }
+            event = event || window.event;
+            var xx=event.clientX; //距离浏览器左侧边缘的距离（包括有滚动条的情况下）
+            var yy=event.clientY; //距离浏览器头部边缘的距离（包括有滚动条的情况下）
+            var xxx=event.target.offsetLeft; //当前元素距离父元素左侧边缘的距离
+            var yyy=event.target.offsetTop;  //当前元素距离父元素头部边缘的距离
+            // screenLeft 和 screenTop 谷歌浏览器中是body的属性
+            // document.body.scrollLeft;
+            // document.body.scrollTop;
+            // 在别的浏览器中screenLeft 和 screenTop 谷歌浏览器中是 document.documentElement的属性
+            // document.documentElement.scrollTop;
+            // document.documentElement.scrollLeft
+            
+            var scr =  document.body? document.body:document.documentElement;
+            var xxxx = scr.scrollLeft;
+            var yyyy = scr.scrollTop;
+            console.log("x="+x+",y="+y+",xx="+xx+",yy="+yy+",xxx="+xxx+",yyy="+yyy+",xxxx="+xxxx+",yyyy="+yyyy);
+        }
+        window.onload = function() {
+            var box1 = document.getElementById("box1");
+            document.onmousemove = function(event){
+                var left = event.clientX;
+                var top = event.clientY;
+            }
+        }
+    </script>
+</head>
+<body onmousedown="coordinates(event)">
+    <div class="box">
+        <p>
+            在文档中点击某个位置。消息框会提示出指针相对于屏幕的 x 和 y 坐标。
+            </p>
+    </div>
+   
+    <div id="box1" class="box1"></div>
+    </body>
+</html>
