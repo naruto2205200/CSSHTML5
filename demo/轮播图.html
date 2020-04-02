@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../base.css">
+    <style>
+        #outer {
+            width: 384px;
+            height: 300px;
+            margin: 50px auto;
+            background-color: yellowgreen;
+            padding: 2px 0;
+            position: relative;
+            overflow: hidden;
+            
+        }
+        /* 
+            由于 outer div的width固定了，li的float:left; 时，必须对ul的宽度进行设定，不然浮动效果看不出来，还是竖着排列
+            如果不设定的话ul的宽度是随outer的宽度而定
+        */
+        #imglist {
+            /* width: 2000px; */
+            position: absolute;
+            transition: 1s;
+            /* transition: opacity 300ms ease-in-out 0s; */
+            /* opacity: 0; */
+            /* animation: run 10s steps(5) infinite; */
+        }
+        @keyframes run {
+            from{
+                left: 0;
+            }
+            /* from 和 to 之间 可以设置 xx% 百分比进行更详细的设置：20%，50% 等等 */
+            /* -800px 为动画图片的宽度 */
+            to {
+                left: -1920px;
+            }
+        }
+        #imglist li {
+            float: left;
+            margin: 0 2px;
+        }
+        #pointer {
+            position: absolute;
+            bottom: 10px;
+            /* 对于设置了position 属性的元素设定水平居中 */
+            left: 50%;
+            transform: translate(-50%,-0);
+           
+        }
+        #pointer a {
+            display: block;
+            width: 15px;
+            height: 15px;
+            margin: 0 5px;
+            float: left;
+            background-color: #b49696;
+            opacity: 0.4;
+            /* 兼容IE8 */
+            filter: alpha(opacity=50);
+            /* 圆角 */
+            border-radius: 50%;
+        }
+        #pointer a:nth-child(1){
+            background-color: "#333";
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var ul = document.getElementById("imglist");
+            var imgs = document.getElementsByTagName("img");
+            // 动态设置ul的width
+            ul.style.width = 488*imgs.length+"px";
+            var imgIndex = 1;
+            
+            var index=0;
+            var allA= document.getElementById("pointer").children;
+            for(var i=0;i<allA.length;i++){
+                allA[i].num = i;
+                allA[i].onclick = function(){
+                    index = this.num;
+                    ul.style.left=(index*-384)+"px";
+                    setA();
+                }
+            }
+
+            function setA(){
+                // if(index>=imgs.length){
+                //     index=0;
+                //     ul.style.left=0+"px";
+                // }
+                for(var j=0;j<allA.length;j++){
+                    allA[j].style.backgroundColor="";
+                }
+                allA[index].style.backgroundColor="#333";
+            }
+            var myInterval = setInterval(function(){
+                // if(index>=imgs.length){
+                //     index=0;
+                //     ul.style.left=0+"px";
+                // } 
+                index++;
+                index %= imgs.length;
+                ul.style.left=(index*-384)+"px";
+                setA();
+                // index++;
+            },1000);
+        }
+    </script>
+</head>
+<body>
+    <div id="outer">
+        <ul id="imglist">
+            <li><img src="../css/img/75635baa6673692e.jpg.webp" alt=""></li>
+            <li><img src="../css/img/a05366be112bafe0.jpg.webp" alt=""></li>
+            <li><img src="../css/img/b9b8655408debe2f.png.webp" alt=""></li>
+            <li><img src="../css/img/c6c60b846146c947.png.webp" alt=""></li>
+            <li><img src="../css/img/f2be8082503dc006.jpg.webp" alt=""></li>
+        </ul>
+        <div id="pointer">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+</body>
+</html>
