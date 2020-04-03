@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script>
+        window.onload = function () {
+            var vm = new Vue({
+                // 元素的挂载位置，值可以是CSS选择器或者DOM元素
+                el: '#app',
+                // 数据模型
+                data: {
+                    msg: 'hello world!'
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        {{ msg }}
+    </div>
+</body>
+
+</html>
