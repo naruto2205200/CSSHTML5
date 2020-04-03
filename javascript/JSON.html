@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../base.css">
+    <style>
+
+    </style>
+    <script>
+        var obj = {name:"zhangsan",age:18,gender:"男"};
+        console.log(obj);
+        // JSON.stringify(js对象);   转换为JSON 字符串
+        var jsonstr = JSON.stringify(obj);
+        console.log(jsonstr);
+        // JSON.parse(JSON字符串) 转换为JSON 对象
+        var st = JSON.parse(jsonstr);
+        console.log(st);
+        // evel() 用来执行一段字符串形式的JS代码，并将执行结果返回
+        // var al = "alert(12);";
+        // var re = eval(al);
+        // 如果字符串带有{} 大括号，则会将其作为代码块执行，如果不希望作为代码块，则需要在字符串前后加上() 括号
+        // 开发中尽量不要使用：1、性能差；2、具有安全隐患；
+        eval("("+jsonstr+")");
+        var aa;
+        console.log(aa);
+        if(aa){
+            console.log(1);
+        }else{
+            console.log(12);
+        }
+        function fun1(){
+            var aa=1;
+            function fun2(){
+                aa++;
+                console.log(aa);
+            }
+            return fun2;
+        }
+
+        fun1();
+        fun1();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

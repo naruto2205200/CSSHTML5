@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            // var clickBoxs1 = document.querySelectorAll(".clickBox");
+            // for(var i=0;i<clickBoxs1.length;i++){
+            //     //最后打印的i都是3
+            //     clickBoxs1[i].onclick = function(){
+            //         console.log(i);
+            //     }
+            // }
+            // 解决方案1、利用闭包，打印的i分别我 0 1 2
+            var clickBoxs = document.querySelectorAll(".clickBox");
+            for (var i = 0; i < clickBoxs.length; i++) {
+                clickBoxs[i].onclick = iteratorFactory(i);
+            }
+            function iteratorFactory(i) {
+                var onclick = function (e) {
+                    console.log(i)
+                }
+                return onclick;
+            }
+
+
+
+            class Animal {
+                constructor() {
+                    this.type = 'animal'
+                }
+                says(say) {
+                    // setTimeout(function () {
+                    //     // 这里的this指向的是window，所以 this.type 等于 undefined
+                    //     console.log(this.type + ' says ' + say)
+                    // }, 1000);
+                    // 利用 箭头函数，这样函数内部的this对象就是定义时所在的对象，而不是使用时所在的对象
+                    // 实际原因是箭头函数根本没有自己的this，它的this是继承外面的，因此内部的this就是外层代码块的this。
+                    setTimeout(() => {
+                        console.log(this.type + ' says ' + say)
+                    }, 1000);
+                }
+            }
+            var animal = new Animal()
+            animal.says('hi')
+
+            let cat = 'ken'
+            let dog = 'lili'
+            let zoo = { cat, dog }
+            console.log(zoo)  //Object {cat: "ken", dog: "lili"}
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <button class="clickBox">
+
+        </button>
+        <button class="clickBox">
+
+        </button>
+        <button class="clickBox">
+
+        </button>
+    </div>
+</body>
+
+</html>
