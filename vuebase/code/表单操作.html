@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script src="../../js/dateformate.js"></script>
+    <style>
+        form div {
+            height: 40px;
+            line-height: 40px;
+        }
+
+        form div:nth-child(4) {
+            height: auto;
+        }
+
+        /* form div span:first-child {
+            display: inline-block;
+            width: 50px;
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <form>
+            <div>
+                <span>姓名：</span>
+                <span>
+                    <!-- 通过 v-model.lazy 转变input 事件为 change 事件来触发username侦听器完成校验功能 -->
+                    <input type="text" v-model.lazy="username">
+                </span>
+                <span>
+                    {{ username | upper}}
+                </span>
+                <span>{{ tip }}</span>
+            </div>
+            <div>
+                <span>性别：</span>
+                <span>
+                    <input type="radio" name="" id="male" value="1" v-model="gender">
+                    <label for="male">男</label>
+                    <input type="radio" name="" id="female" value="2" v-model="gender">
+                    <label for="female">女</label>
+                </span>
+            </div>
+            <div>
+                <span>爱好：</span>
+                <input type="checkbox" id="ball" value="1" v-model="hobby">
+                <label for="ball">篮球</label>
+                <input type="checkbox" id="sing" value="2" v-model="hobby">
+                <label for="sing">唱歌</label>
+                <input type="checkbox" id="code" value="3" v-model="hobby">
+                <label for="code">写代码</label>
+            </div>
+            <div>
+                <span>职业：</span>
+                <!-- multiple 多选 -->
+                <select v-model="occupation" multiple>
+                    <option value="0">请选择职业...</option>
+                    <option value="1">教师</option>
+                    <option value="2">软件工程师</option>
+                    <option value="3">律师</option>
+                </select>
+            </div>
+            <div>
+                <span>个人简介：</span>
+                <textarea v-model.trim="desc"></textarea>
+            </div>
+            <div>
+                <span v-pre>{{ this will not be compiled }}</span>
+            </div>
+            <div>
+                <input type="text" v-focus>
+            </div>
+            <div>
+                <input type="submit" value="提交" @click.prevent="handle">
+            </div>
+            <div>
+                <input type="text" v-model="firstName">
+                <input type="text" v-model="lastName">
+                <span>{{ fullName }}</span>
+            </div>
+            <div>
+                <span>{{ fullName2 }}</span>
+            </div>
+            <div>
+                <span>{{ date | format('yyyy-MM-dd hh:mm:ss')}}</span>
+            </div>
+        </form>
+
+    </div>
+    <script>
+        // 全局
+        // Vue.directive('focus', {
+        //     inserted: function (el) {
+        //         el.focus();
+        //     }
+        // })
+        // 过滤器，过滤器可以携带参数，function(val,args)，第一个参数为默认的、通过过滤器传递过来的参数，args是额外传递的参数
+        Vue.filter('upper',function(val){
+            return val.charAt(0).toUpperCase()+val.substr(1);
+        });
+        Vue.filter('format',function(val,arg){
+            // return val.getFullYear()+'-'+(val.getMonth()+1)+"-"+val.getDate();
+            return dateformate(val,arg);
+        });
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                username: 'lisi',
+                gender: 1,
+                hobby: [1, 2],
+                // occupation:2,
+                occupation: [1, 2],
+                desc: '',
+                firstName: '',
+                lastName: '',
+                fullName: '',
+                tip: '',
+                date: new Date(),
+            },
+            methods: {
+                handle: function () {
+                    // console.log(this.username,this.gender,this.hobby.toString());
+                    console.log(this.desc.length);
+                },
+                checkName: function(username){
+                    var that = this;
+                    setTimeout(() => {
+                        if(username=="admin"){
+                            that.tip = "用户名已存在！";
+                        }else{
+                            that.tip="用户名可以使用";
+                        }
+                    }, 3000);
+                }
+            },
+            // 局部
+            directives: {
+                focus: {
+                    inserted: function(el){
+                        el.focus();
+                    }
+                }
+            },
+            // 计算属性
+            computed: {
+                now: function(){
+                    console.log(2)
+                    return Date.now()
+                },
+                fullName2: function() {
+                    return this.firstName+ ' ' + this.lastName;
+                },
+            },
+            // 侦听器
+            watch: {
+                firstName: function(val){
+                    this.fullName = val +' '+ this.lastName;
+                },
+                lastName: function(val){
+                    this.fullName = this.firstName +' '+ val;
+                },
+                // 对username进行校验
+                username: function(val){
+                    this.checkName(val);
+                    this.tip = "正在验证....";
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
