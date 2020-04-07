@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../base.css">
+    <script src="../js/vue.js"></script>
+    <style>
+        .tab ul li {
+            float: left;
+            width: 80px;
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid blue;
+            border-bottom: 0px;
+            text-align: center;
+        }
+
+        .tab div {
+            width: 300px;
+            height: 155px;
+            border: 1px solid blue;
+            border-top: 0px;
+            display: none;
+        }
+
+        .tab div img {
+            width: 300px;
+            text-align: center;
+        }
+
+        .tab div.current {
+            display: block;
+        }
+
+        .tab ul li.active {
+            background-color: rgb(245, 98, 12);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="tab ">
+            <ul class="clearfix">
+                <li :class='currentIndex==index?"active":""' :key='item.id' v-for='(item,index) in list' @click='handle(index)'>
+                    {{ item.title }}
+                </li>
+            </ul>
+            <div :class='currentIndex==index?"current":""':key='item.id' v-for='(item,index) in list'>
+                <img :src="item.path" alt="">
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                currentIndex: 0,
+                list: [
+                    {
+                        id: 1,
+                        title: 'apple',
+                        path: '../../demo/images/1.jpg'
+                    },
+                    {
+                        id: 2,
+                        title: 'orange',
+                        path: '../../demo/images/2.jpg'
+                    },
+                    {
+                        id: 3,
+                        title: 'lemon',
+                        path: '../../demo/images/3.jpg'
+                    }
+                ]
+            },
+            methods: {
+                handle:function(index) {
+                    this.currentIndex = index;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -10,25 +10,72 @@
         [v-cloak] {
             display: none;
         }
-    </style>
-    <script>
-        window.onload = function () {
-            var vm = new Vue({
-                // 元素的挂载位置，值可以是CSS选择器或者DOM元素
-                el: '#app',
-                // 数据模型
-                data: {
-                    msg: 'hello world!'
-                }
-            });
+
+        .active {
+            width: 50px;
+            height: 50px;
+            background-color: #333333;
         }
-    </script>
+        .base {
+            color: blue;
+        }
+    </style>
+    
 </head>
 
 <body>
-    <div id="app"  v-cloak>
-        {{ msg }}
+    <div id="app">
+        <div  v-cloak>
+            {{ msg }}
+        </div>
+        <div v-html="msghtml"></div>
+        <div>
+            <input type="text" v-model="msg">
+            <span>{{ num }}</span>
+
+        </div>
+        <input type="button" value="点击" @click="num++">
+        <!-- 调用handle时，如果不传参数，默认第一个参数就是$event -->
+        <input type="button" value="点击" @click="handle1">
+        <!-- 传参和不传参的区别，不传参数时，直接写函数名即可，传参时需要小括号（），参数写进去 -->
+        <input type="button" value="点击" @click="handle2(12,$event)">
+        <a v-bind:href="url">百度</a>
+        <button v-on:click="handle3">修改百度</button>
+        <!-- 这里的base 并不会被覆盖 -->
+        <div class ="base"  :class="{active:isActive}">这是测试</div>
+        <button @click="handle4">切换样式</button>
     </div>
+    <script>
+        var vm = new Vue({
+            // 元素的挂载位置，值可以是CSS选择器或者DOM元素
+            el: '#app',
+            // 数据模型
+            data: {
+                num: 0,
+                msg: 'hello world!',
+                msghtml: '<h1>HTML</h1>',
+                url: 'http://www.baidu.com',
+                isActive: true,
+            },
+            methods: {
+                handle2: function(p,event){
+                    console.log(event);
+                    this.num++;
+                },
+                // 如果函数调用时没有传参，则默认第一个参数就是事件函数
+                handle1: function(event){
+                    console.log(event);
+                },
+                handle3: function(){
+                    this.url = 'http://www.duowan.com';
+                },
+                handle4: function(){
+                    this.isActive = !this.isActive;
+                }
+
+            }
+        });
+</script>
 </body>
 
 </html>
