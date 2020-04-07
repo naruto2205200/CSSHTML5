@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script src="../../js/dateformate.js"></script>
+    <link rel="stylesheet" href="../../base.css">
+    <style>
+        .grid {
+            margin: auto;
+            width: 500px;
+            text-align: center;
+            /* background-color: green; */
+        }
+        .grid table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .grid th,td {
+            padding: 10px;
+            border: 1px dashed orange;
+            height: 35px;
+            line-height: 35px;
+        }
+        .grid th {
+            background-color: orange;
+        }
+
+        .grid .book {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            background-color: #F3DCAB;
+         
+        }
+        
+        input {
+            display: inline-block;
+            outline: none;
+            width: 150px;
+            vertical-align: middle;
+            margin-top: -4px;
+            font-size: 20px;
+        }
+        
+        button {
+            border: none;
+            font-size: 15px;
+            width: 50px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="grid">
+            <div>
+                <h1>图书管理</h1>
+                <div class="book ">
+                    <div >
+                        <label for="id">编号：</label>
+                        <input type="text" id="id" v-model="id">
+                        <label for="name">名称：</label>
+                        <input type="text" id="name" v-model="name">
+                        <button @click="handle">提交</button>
+                    </div>
+                </div>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr :key="item.id" v-for="(item,index) in books ">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.date }}</td>
+                        <td>
+                            <a href="JavaScript:;" @click.prevent="toEdit(item.id)"  >修改</a>
+                            <span>|</span>
+                            <a href="JavaScript:;" @click.prevent="toDelete(item.id)" >删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id: '',
+                name: '',
+                books: [
+                    {
+                        id: 1,
+                        name: '三国演义',
+                        date: '2018-01-01'
+                    },
+                    {
+                        id: 2,
+                        name: '水浒传',
+                        date: '2020-01-01'
+                    },
+                    {
+                        id: 3,
+                        name: '红楼梦',
+                        date: '2010-01-01'
+                    },
+                    {
+                        id: 4,
+                        name: '西游记',
+                        date: '2001-01-01'
+                    },
+                ]
+            },
+            methods: {
+                handle: function(){
+                  var book = {};
+                  book.id = this.id;
+                  book.name = this.name;  
+                  this.books.push(book);
+                  this.id ='';
+                  this.name = '';
+                },
+                toEdit: function(id){
+                    // var book = this.books.filter(function(item){
+                    //     return item.id==id;
+                    // });
+                    var book = this.books.filter((item)=> item.id==id);
+                    this.id= book[0].id;
+                    this.name = book[0].name;
+                    console.log(this.id,this.name)
+                },
+                toDelete: function(id){
+
+                },
+                add: function () {
+                    this.list.push(this.fname);
+                },
+                change: function () {
+                    this.list = this.list.slice(0, 2);
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>
