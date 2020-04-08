@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script src="../../js/dateformate.js"></script>
+    <link rel="stylesheet" href="../../base.css">
+    <script>
+        window.onload = function(){
+            // 自定义组件
+            // 自定义组件名称如果使用驼峰式命名法，则调用时需注意不能直接使用，
+            // 如<buttonCounter></buttonCounter>是不正确的，必须 <button-counter></button-counter>
+            Vue.component('button-counter',{
+                // data是一个函数
+                data: function(){
+                    return {
+                        count: 0,
+                    }
+                },
+                // template内容只能有一个根元素，即最外层的元素不能有兄弟元素
+                // '<button>点击</button><button>点击</button>' 这种写法是错误的，可以用一个父元素如div包起来
+                // template:` 内容 `(注意标点符号) 这种写法是模板字符串，ES6的语法，对于复杂的布局可以这么写
+                // template: '<button @click="count++">点击{{count}}次</button>',
+                template: '<button @click="handle">点击{{count}}次</button>',
+                methods: {
+                    handle:function(){
+                        this.count+=2;
+                    }
+                },
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                // 局部组件：只能在注册的父组件内部使用
+                components: {
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="app">
+        <button-counter></button-counter>
+    </div>
+</body>
+</html>

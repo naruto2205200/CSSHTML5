@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script src="../../js/dateformate.js"></script>
+    <link rel="stylesheet" href="../../base.css">
+    <style>
+        button {
+            /* width: 50px; */
+            height: 30px;
+            font-size: 15px;
+            margin-top: 10px;
+            padding: 0 10px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            // 父组件向子组件传值
+            Vue.component('menu-item', {
+                // props：单向数据流，只允许父向子传输数据，不允许子向父传输数据
+                // props中的值类型可以是以下类型：String/Number/Boolean/Array/Object/Function/Pro,ise
+                props: [
+                    'childTitle'
+                ],
+                data: function () {
+                    return {
+                        msg: '子组件'
+                    }
+                },
+                // <slot></slot> 插槽：用来接收子组件中间的文本内容，如果父组件之间没有内容，子组件显示默认内容
+                // 如果父组件有内容，则替换默认内容
+                template: `
+                    <div>
+                        {{msg +"------"+childTitle}}
+                        <slot>默认内容</slot>
+                    </div>
+                `
+            });
+            // 子组件调用父组件
+            Vue.component('menu-item2', {
+                props: [
+                    'childTitle'
+                ],
+                data: function () {
+                    return {
+                        msg: '子组件'
+                    }
+                },
+                // $emit是关键
+                template: `
+                    <div>
+                        <div>
+                            <button @click="$emit('add-num')">操作父组件</button>  
+                        </div>    
+                    </div>
+                `
+            });
+            // 子组件向父组件传值
+            Vue.component('menu-item3', {
+                props: [
+                    'childTitle'
+                ],
+                data: function () {
+                    return {
+                        msg: '子组件'
+                    }
+                },
+                // $emit是关键
+                template: `
+                    <div>
+                        <div>
+                            <button @click="$emit('add-num',5)">操作父组件</button>  
+                        </div>    
+                    </div>
+                `
+            });
+            // 非父子组件之间的传值 start
+            Vue.component('test1-item', {
+                data: function () {
+                    return {
+                        num: 0,
+                    }
+                },
+                template: `
+                    <div>
+                        <div>Tom: {{ num }}</div>
+                        <button @click='handle'>点击</button>
+                    </div>
+                `,
+                methods: {
+                    handle: function () {
+                        hub.$emit('jorn-event', 2);
+                    }
+                },
+                mounted: function () {
+                    hub.$on('tom-event', (val) => {
+                        this.num += val;
+                    })
+                },
+            });
+            Vue.component('test2-item', {
+                data: function () {
+                    return {
+                        num: 0,
+                    }
+                },
+                template: `
+                    <div>
+                        <div>Jorn: {{ num }}</div>
+                        <button @click='handle'>点击</button>
+                    </div>
+                `,
+                methods: {
+                    handle: function () {
+                        hub.$emit('tom-event', 1);
+                    }
+                },
+                mounted: function () {
+                    hub.$on('jorn-event', (val) => {
+                        this.num += val;
+                    })
+                },
+            });
+            // 事件中心
+            var hub = new Vue();
+            // 非父子组件之间的传值 end
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    ptitle: '父组件',
+                    num: 0,
+                },
+                methods: {
+                    handler: function () {
+                        this.num++;
+                    },
+                    handler2: function (val) {
+                        this.num += val;
+                    },
+                    // 销毁事件中心注册的事件
+                    offHub: function(){
+                        hub.$off('jorn-event')
+                        hub.$off('tom-event')
+                    }
+                },
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 静态值 -->
+        <!-- 插槽内容通过在子组件中 slot 来接收 -->
+        <menu-item child-title="父组件">插槽内容</menu-item>
+        <!-- 动态值 -->
+        <menu-item2 :child-title="ptitle" @add-num="handler"></menu-item2>
+        <!-- $event 表示子组件传递过来的内容，是固定的 -->
+        <menu-item3 :child-title="ptitle" @add-num="handler2($event)"></menu-item3>
+        {{ num }}
+
+        <test1-item></test1-item>
+        <test2-item></test2-item>
+        <button @click='offHub'>销毁事件中心注册事件</button>
+    </div>
+</body>
+
+</html>
