@@ -15,16 +15,20 @@
             text-align: center;
             /* background-color: green; */
         }
+
         .grid table {
             width: 100%;
             border-collapse: collapse;
         }
-        .grid th,td {
+
+        .grid th,
+        td {
             padding: 10px;
             border: 1px dashed orange;
             height: 35px;
             line-height: 35px;
         }
+
         .grid th {
             background-color: orange;
         }
@@ -33,9 +37,9 @@
             padding-bottom: 10px;
             padding-top: 10px;
             background-color: #F3DCAB;
-         
+
         }
-        
+
         input {
             display: inline-block;
             outline: none;
@@ -44,12 +48,17 @@
             margin-top: -4px;
             font-size: 20px;
         }
-        
+
         button {
             border: none;
             font-size: 15px;
             width: 50px;
             border-radius: 10px;
+        }
+        .grid .total {
+            height: 30px;
+            line-height: 30px;
+            background-color: #23c53e;
         }
     </style>
 </head>
@@ -60,16 +69,18 @@
             <div>
                 <h1>图书管理</h1>
                 <div class="book ">
-                    <div >
+                    <div>
                         <label for="id">编号：</label>
-                        <input type="text" id="id" v-model="id">
+                        <input type="text" id="id" v-model="id" :disabled="flag" v-focus>
                         <label for="name">名称：</label>
                         <input type="text" id="name" v-model="name">
-                        <button @click="handle">提交</button>
+                        <button @click="handle" :disabled="submitFlag">提交</button>
                     </div>
                 </div>
             </div>
-            
+            <div class="total">
+                <span>图书数量：{{ total }}</span>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -83,11 +94,11 @@
                     <tr :key="item.id" v-for="(item,index) in books ">
                         <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
-                        <td>{{ item.date }}</td>
+                        <td>{{ item.date | format('yyyy-MM-dd hh:mm:ss')}}</td>
                         <td>
-                            <a href="JavaScript:;" @click.prevent="toEdit(item.id)"  >修改</a>
+                            <a href="JavaScript:;" @click.prevent="toEdit(item.id)">修改</a>
                             <span>|</span>
-                            <a href="JavaScript:;" @click.prevent="toDelete(item.id)" >删除</a>
+                            <a href="JavaScript:;" @click.prevent="toDelete(item.id)">删除</a>
                         </td>
                     </tr>
                 </tbody>
@@ -95,61 +106,109 @@
         </div>
     </div>
     <script>
+        //自定义过滤器：获取焦点
+        Vue.directive('focus', {
+            inserted: function (el) {
+                el.focus();
+            }
+        });
+        //自定义过滤器：日期格式化
+        Vue.filter('format',function(val,arg){
+            // return val.getFullYear()+'-'+(val.getMonth()+1)+"-"+val.getDate();
+            return dateformate(val,arg);
+        });
         var vm = new Vue({
             el: '#app',
             data: {
                 id: '',
                 name: '',
+                flag: false,
+                submitFlag: false,
                 books: [
                     {
                         id: 1,
                         name: '三国演义',
-                        date: '2018-01-01'
+                        date: new Date()
                     },
                     {
                         id: 2,
                         name: '水浒传',
-                        date: '2020-01-01'
+                        date: new Date()
                     },
                     {
                         id: 3,
                         name: '红楼梦',
-                        date: '2010-01-01'
+                        date: new Date()
                     },
                     {
                         id: 4,
                         name: '西游记',
-                        date: '2001-01-01'
+                        date: new Date()
                     },
                 ]
             },
             methods: {
-                handle: function(){
-                  var book = {};
-                  book.id = this.id;
-                  book.name = this.name;  
-                  this.books.push(book);
-                  this.id ='';
-                  this.name = '';
+                handle: function () {
+                    if (this.flag) {
+                        this.books.some((item) => {
+                            if (item.id == this.id) {
+                                item.name = this.name;
+                                return true;
+                            }
+                        })
+                        this.flag = false;
+                    } else {
+                        var book = {};
+                        book.id = this.id;
+                        book.name = this.name;
+                        book.date =new Date();
+                        this.books.push(book);
+                    }
+                    this.id = '';
+                    this.name = '';
+
                 },
-                toEdit: function(id){
+                toEdit: function (id) {
                     // var book = this.books.filter(function(item){
                     //     return item.id==id;
                     // });
-                    var book = this.books.filter((item)=> item.id==id);
-                    this.id= book[0].id;
+                    var book = this.books.filter((item) => item.id == id);
+                    this.id = book[0].id;
                     this.name = book[0].name;
-                    console.log(this.id,this.name)
+                    console.log(this.id, this.name)
+                    this.flag = true;
                 },
-                toDelete: function(id){
+                toDelete: function (id) {
+                    // 第一种方法
+                    // var index = this.books.findIndex(function(item){
+                    //     return item.id==id;
+                    // });
+                    // console.log(index);
+                    // this.books.splice(index,1);
 
+                    // 第二种方法
+                    this.books = this.books.filter(function(item){
+                        return item.id!=id;
+                    });
                 },
-                add: function () {
-                    this.list.push(this.fname);
-                },
-                change: function () {
-                    this.list = this.list.slice(0, 2);
-                },
+            },
+            computed: {
+                total: function(){
+                    return this.books.length;
+                }
+            },
+            watch: {
+                name: function(val){
+                    // 验证书名是否已存在
+                    var flag = this.books.some(function(item){
+                        return item.name == val;
+                    })
+                    if(flag){
+                        this.submitFlag = true;
+                    }else{
+                        this.submitFlag = false;
+                    }
+                }
             },
         })
     </script>
