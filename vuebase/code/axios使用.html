@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script src="../../js/dateformate.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        window.onload = function () {
+            // 配置全局通用
+            // axios.defaults.baseURL = "http://localhost:8090/hello/";
+            // axios.get('getlunbo').then(function(resposne){
+            //     console.log(resposne.data);
+            // }).catch(function(error){
+            //     console.log(error);
+            // });
+
+            // 请求拦截器:请求之前拦截
+            // axios.interceptors.request.use(function(cofig){
+            //     // console.log(config);
+            //     // config.headers.mytoken = 'hihao';
+            //     return config;
+            // },function(error){
+
+            // });
+
+            // 添加请求拦截器
+            axios.interceptors.request.use(function (config) {
+                // 在发送请求之前做些什么
+                console.log(config);
+                // config.headers.mytoken = 'hihao';
+                return config;
+            }, function (error) {
+                // 对请求错误做些什么
+                // return Promise.reject(error);
+            });
+
+            // 添加响应拦截器
+            axios.interceptors.response.use(function (response) {
+                console.log(response);
+                // 对响应数据做点什么
+                return response;
+            }, function (error) {
+                // 对响应错误做点什么
+                return Promise.reject(error);
+            });
+
+            // get请求
+            axios.get('http://localhost:8090/hello/getlunbo').then(function (resposne) {
+                console.log(resposne.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+            // post请求
+            axios.post('http://localhost:8090/hello/addComment', {
+                id: 1,
+                newsId: 1,
+                userName: 'zhangsan',
+                addTime: '2020-04-09',
+                content: '这是测试数据'
+            }).then(function (resposne) {
+                console.log(resposne.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+            // URLSearchParams 会把请求 Content-Type: application/x-www-form-urlencoded
+            // 而不是 Content-Type: application/x-www-form-urlencoded;这样导致后台处理数据时，需要进行相关处理
+            // var params = new URLSearchParams();
+            // params.append("id",1);
+            // params.append("userName","zhangsan");
+            // params.append("content","测试数据");
+            // params.append("newsId",1);
+            // params.append("addTime","2020-04-09");
+            // axios.post('http://localhost:8090/hello/addComment2',params).then(function(resposne){
+            //     console.log(resposne.data);
+            // }).catch(function(error){
+            //     console.log(error);
+            // });
+
+            async function queryData(){
+                var info = await axios.get('http://localhost:8090/hello/getlunbo');
+                return info;
+            }
+            queryData().then(function(data){
+                console.log(data);
+            },function(error){
+                console.log(error);
+            })
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
