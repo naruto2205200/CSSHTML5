@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router_3.1.6.js"></script>
+    <script>
+        window.onload = function () {
+            const User = {
+
+                //  $route.params.id 用于访问传递过来的参数
+                // template: '<div>这是User组件 {{ $route.params.id }}</div>'
+                // 使用props接收参数
+                props: ['id'],
+                template: '<div>这是User组件 {{ id }}</div>'
+            }
+            const router = new VueRouter({
+                routes: [
+                    { path: '/', redirect: '/user' },
+                    // 动态路由
+                    // { path: '/user/:id', component: User }
+                    // $route 与对应路由高度耦合，不够灵活，所以可以使用props将组件与路由解耦
+                    // props也可以是一个对象，对应的组件也必须为对象才能接收参数
+                    { path: '/user/:id', component: User ,props: true}
+                ]
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                // 挂载实例对象，可以直接写
+                // router
+                router: router,
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <!--   <router-link to="{ name: 'user', params: { userId: 123 }}">
+            name用于命名路由规则，params 可以传递多个参数
+        </router-link>  -->
+        <router-link to="/user/1">Go to User1</router-link>
+        <router-link to="/user/2">Go to User2</router-link>
+        <router-link to="/user/3">Go to User3</router-link>
+        <div>
+            <router-view></router-view>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router_3.1.6.js"></script>
+    <script>
+        window.onload = function () {
+
+
+            const User = {
+                template: '<div>这是User组件<button @click="goRegister">跳转到注册</button></div>',
+                methods: {
+                    goRegister: function(){
+                        this.$router.push('/register')
+                    }
+                },
+            }
+            const Register = {
+                template: `
+                    <div>这是register组件
+                        <div>
+                            <router-link to="/register/tab1">Go to tab1</router-link>
+                            <router-link to="/register/tab2">Go to tab2</router-link>
+                        </div>
+                        <div>
+                            <router-view></router-view>
+                        </div>
+                    </div>
+                `
+            }
+            const Tab1 = {
+                template: '<div>这是tab1组件</div>'
+            }
+            const Tab2 = {
+                template: '<div>这是tab2组件</div>'
+            }
+            const router = new VueRouter({
+                routes: [
+                    { path: '/', redirect: '/user' },
+                    { path: '/user', component: User },
+                    {
+                        path: '/register', component: Register, children: [
+                            { path: '/register/tab1', component: Tab1 },
+                            { path: '/register/tab2', component: Tab2 }
+                        ]
+                    },
+                ]
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                // 挂载实例对象，可以直接写
+                // router
+                router: router,
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/user">Go to User</router-link>
+        <router-link to="/register">Go to Register</router-link>
+        <div>
+            <router-view></router-view>
+        </div>
+    </div>
+</body>
+
+</html>

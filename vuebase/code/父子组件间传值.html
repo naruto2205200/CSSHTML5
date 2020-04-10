@@ -114,7 +114,7 @@
                         <button @click='handle'>点击</button>
                     </div>
                 `,
-                methods: {
+                methods: { 
                     handle: function () {
                         hub.$emit('tom-event', 1);
                     }
