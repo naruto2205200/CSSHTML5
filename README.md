@@ -1,5 +1,6 @@
 # 2020-04-13 
 ## 安装 babel
+### babel：把JavaScript中的高级语法转换为es5，让低端运行环境能够识别并执行
 npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/node
 npm install --save @babel/polyfill 
 
@@ -29,7 +30,7 @@ npm install webpack webpack-cli -D
 2、在项目根目录创建名为 webpack.config.js的webpack配置文件
 3、在webpack.config.js文件中配置内容
 	module.exports = {
-		mode: 'development'//mode用来指定构建模式 ： development 开发模式，production 生产模式（上线时使用）
+		mode: 'development'//mode用来指定构建模式 ： development 开发模式，production 生产模式（上线时使用，会把相关文件进行压缩）
 	}
 4、在package.json 配置文件中的scripts 节点下，新增dev脚本如下：
 	"scripts":{
@@ -97,9 +98,94 @@ scss-loader  打包.scss 相关文件
 url-loader 打包css文件中和url路径相关的文件
 ts-locader 打包TypeScript文件
 
+ —D 是--save-dev 的缩写
 
-npm install --save-dev url-loader
-npm install --save-dev ts-loader
-npm install --save-dev scss-loader
-npm install --save-dev less-loader
-npm install --save-dev css-loader
+
+npm install url-loader -D
+npm install ts-loader -D
+npm install sass-loader node-sass -D
+npm install less-loader less -D
+npm install css-loader -D
+npm install style-loader -D
+
+### 添加css相关的loader
+在webpack.config.js的module 下的rules 数组中，添加loader规则：
+module:{
+	rules:[
+		{test:/\.css$/,use:['style-loader','css-loader']},
+		{test:/\.less$/,use:['style-loader','css-loader','less-loader']},
+		{test:/\.scss$/,use:['style-loader','css-loader','sass-loader']}
+	]
+}
+
+### postCSS 自动添加css的兼容前缀
+npm install postcss-loader autoprefixer -D 
+在根目录创建postcss的配置文件 postcss.config.js 并初始化如下配置：
+const autoprefixer = require('autoprefixer')
+module.exports={
+	plugins:[
+		autoprefixer
+	]
+}
+在webpack.config.js 的module 的rules中，修改css的loader ,多了一个 postcss-loader
+module:{
+	rules:[
+		{test:/\.css$/,use:['style-loader','css-loader','postcss-loader']}
+	]
+}
+
+### 打包样式表中的图片和字体文件
+npm install url-loader file-loader -D
+在webpack.config.js中添加rules
+module:{
+	rules:[
+		{test:/\.jpg|png|gif|bmp|ttf|svg$/,
+		use:['url-loader?limit=16940']} // limit=16940 表示指定图片的大小，单位是字节（byte），只有小于limit大小的图片才会被转为base64图片
+	]
+}
+### 打包js文件中的高级语法 ES6+ babel相关的配置
+1、安装babel转换器相关的包：npm install babel-loader @babel/core @babel/runtime -D
+2、安装babel语法插件相关的包：npm install @babel/preset-env @babel/plugin-transform-runtime @babel/plugin-proposal-class-properties -D
+3、在根目录下创建babel的配置文件babel.config.js 并初始化基本配置：
+module.exports = {
+	presets: ['@babel/preset-env'],
+	plugins: ['@babel/plugin-transform-runtime','@babel/plugin-proposal-class-properties']
+}
+4、在webpack.config.js rules中添加loader：
+{test: /\.js$/,use: 'babel-loader',exclude:/node_modules/} // 排除node_modules 下的js文件
+
+## Vue 单文件组件
+安装 Vue 文件提示插件：Vetur
+需要安装vue组件的加载器
+1、npm install vue-loader vue-template-compiler -D 
+2、在webpack.config.js rules中添加loader：
+	const VueLoaderPlugin = require('vue-loader/lib/plugin')
+	{test: /\.vue$/,loader:'vue-loader'}
+
+	在Plugins中添加插件
+	plugins:[
+		//... 其他插件
+		new VueLoaderPlugin() //确保引入这个插件
+	]
+
+### 在webpack中使用vue
+1、npm install vue -s  安装
+2、在src 的index.js入口文件中，通过 import Vue from 'vue' 来导入vue构造函数
+3、创建vue的实例对象，并指定要控制的el区域
+
+	import Vue from 'vue'
+	import App from '../components/App.vue'
+	const vm = new Vue({
+		el: '#app',
+		//通过render函数，把指定的组件渲染到el区域中，在webpack 项目的入口文件中new Vue中只使用render，不使用别的什么template之类的属性
+		render: h=>h(App)
+	})
+
+### webpack 打包发布
+在 package.json 中添加配置
+scripts:{
+	"build":"webpack -p",
+	"dev": "webpack-dev-server --open --port 8888"
+}
+执行命令：npm run build  进行webpack的相关打包和发布（相当于执行了webpack -p 命令），读取 webpack.config.js 文件的相关配置，会把打包好的信息放入dist文件夹下，可以预先把dist文件夹删除掉
+dist文件夹下就是完整的项目了，把打包好的dist文件夹用来上线就可以了

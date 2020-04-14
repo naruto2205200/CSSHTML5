@@ -1,3 +1,11 @@
 li {
-    list-style: none;
+  list-style: none;
+}
+::placeholder {
+  color: red;
+}
+#box {
+  width: 350px;
+  height: 350px;
+  background-image: url("../../css/img/u=3696242423,2361317260&fm=26&gp=0.jpg");
 }
