@@ -7,10 +7,10 @@
             </div>
             <el-form label-width="0px" class="login_form">
                 <el-form-item>
-                    <el-input ></el-input>
+                    <el-input prefix-icon="fas fa-user" ></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-input ></el-input>
+                    <el-input prefix-icon="fa fa-lock"></el-input>
                 </el-form-item>
                 <el-form-item class="btns">
                     <el-button type="primary">登录</el-button>
@@ -62,8 +62,10 @@ export default {
     }
     .login_form {
         position: absolute;
-        // bottom: 0;
-        // width: 100%;
+        bottom: 0;
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
     }
 }
 </style>
