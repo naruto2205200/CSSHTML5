@@ -189,3 +189,47 @@ scripts:{
 }
 执行命令：npm run build  进行webpack的相关打包和发布（相当于执行了webpack -p 命令），读取 webpack.config.js 文件的相关配置，会把打包好的信息放入dist文件夹下，可以预先把dist文件夹删除掉
 dist文件夹下就是完整的项目了，把打包好的dist文件夹用来上线就可以了
+
+## 2020-04-17  Vue脚手架的使用
+### Vue脚手架
+npm install -g @vue/cli
+安装完成之后再cmd中vue -V 查看是否安装成功，有版本号则说明成功
+### 基于脚手架创建项目的方式
+1、基于交互式命令方式
+vue create my-project
+2、基于图形化界面的方式
+vue ui
+
+#### 1、基于交互式命令方式
+#### 创建时会选择一些功能，选择自定义： Manually select features
+#### 然后选项通过上下键选择，然后空格键来打*号选中需要安装的功能，选择完成之后回车下一步
+#### use history mode for router? 这里选择No ，一般都使用hash路由，而不是历史路由
+#### 接下来选择ESLint + Standard config  标准
+#### ESLint on save
+#### In dedicated config files
+#### Save this as a preset for future projects? 是否保存这些选项为一个模板，以后的项目都这样执行  这里选择N
+
+#### 2、基于图形化界面的方式
+#### 基于交互式命令方式 有点麻烦
+#### cmd 中输入： vue ui 打开可视化页面进行相关操作
+在package.json.js 配置信息，自动打开浏览器首页（不推荐）
+ "vue": {
+    "devServer": {
+      "port": 8888,
+      "open": true
+    }
+  }
+
+
+推荐在vue.config.js文件中配置服务信息
+
+
+
+#### 项目目录：public 静态资源，src：页面代码
+
+### 使用Element-UI
+#### 安装vue-cli-plugin-element 插件
+#### 在vue ui 可视化界面，安装插件，选择import on demand 不要选择Fully import（这是默认的，需要重新选择）
+
+### 在vue ui 可视化界面 安装axios依赖
+### 安装 less-loader 和less 两个开发依赖以支持less

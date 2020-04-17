@@ -1,3 +1,4 @@
 # 提交忽略 node_modules 下的所有内容
-# /vuebase/node_modules
-node_modules/
+/vuebase/node_modules
+/webpack-study/node_modules
+/project_demo
