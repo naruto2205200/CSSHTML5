@@ -1,7 +1,10 @@
 import Vue from 'vue'
-import { Button,Form,FormItem,Input } from 'element-ui'
+import { Button,Form,FormItem,Input,Message } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
+// 对message 进行全局挂载
+Vue.prototype.$message =Message
+
