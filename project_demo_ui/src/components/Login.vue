@@ -33,40 +33,40 @@ export default {
     return {
       // 登录表单数据绑定对象
       loginForm: {
-        username: "",
-        password: ""
+        username: '',
+        password: ''
       },
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 8, max: 15, message: "长度在 8 到 15 个字符", trigger: "blur" }
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 8, max: 15, message: '长度在 8 到 15 个字符', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 6, max: 15, message: "长度在 6 到 15 个字符", trigger: "blur" }
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
         ]
       }
-    };
+    }
   },
   methods: {
     resetForm() {
-      console.log(this.$refs);
-      this.$refs.ruleForm.resetFields();
+      console.log(this.$refs)
+      this.$refs.ruleForm.resetFields()
     },
     login() {
       this.$refs.ruleForm.validate(async valid => {
         //   console.log(valid)
-        if (!valid) return;
+        if (!valid) return
         // post请求,返回的结果是一个Promise对象，对于Promise 可以对其请求方法进行异步简化操作：await async
         // const result = this.$http.post('login',this.loginForm);
         // const result = await this.$http.post("login", this.loginForm);
         // 这里需要对登录返回结果进行相应的逻辑判断
         // console.log(result);
-          this.$message({
-            message: "登录成功!",
-            type: "success"
-          });
-        this.$router.push("/home")
+        this.$message({
+          message: '登录成功!',
+          type: 'success'
+        })
+        this.$router.push('/home')
         // if (result == 200) {
         //   this.$message({
         //     message: "登录成功!",
@@ -81,10 +81,10 @@ export default {
         //     type: "warning"
         //   });
         // }
-      });
+      })
     }
   }
-};
+}
 </script>
 <style lang="less" scoped>
 .login_container {
