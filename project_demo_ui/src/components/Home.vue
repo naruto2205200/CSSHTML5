@@ -18,26 +18,22 @@
           active-text-color="#ffd04b"
           :unique-opened="true"
           :collapse="isCollapse"
-          :collapse-transition = "false"
+          :collapse-transition="false"
           :router="true"
+          :default-active="navState"
         >
-          <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>导航一</span>
-            </template>
-            <el-menu-item index="1-4-1">
-              <i class="el-icon-menu"></i>
-              <span>选项1</span>
-            </el-menu-item>
-          </el-submenu>
           <el-submenu :index="item.id+''" v-for="item in menuList" :key="item.id">
             <template slot="title">
               <!-- <i class="el-icon-location"></i> -->
               <i :class="iconOjb[item.id]"></i>
               <span>{{ item.name }}</span>
             </template>
-            <el-menu-item :index="'/'+subItem.path" v-for="subItem in item.children" :key="subItem.id">
+            <el-menu-item
+              :index="'/'+subItem.path"
+              v-for="subItem in item.children"
+              :key="subItem.id"
+              @click="saveNavState('/'+subItem.path)"
+            >
               <i class="el-icon-menu"></i>
               <span>{{ subItem.name }}</span>
             </el-menu-item>
@@ -57,18 +53,21 @@ export default {
     return {
       menuList: [],
       iconOjb: {
-        '1': '',
-        '2': '',
-        '3': '',
-        '4': '',
-        '5': ''
+        '1': 'fas fa-address-book',
+        '2': 'fas fa-taxi',
+        '3': 'fas fa-subway',
+        '4': 'fas fa-plane',
+        '5': 'fas fa-car'
       },
-      isCollapse: false
+      isCollapse: false,
+      navState: ''
     }
   },
-  create() {
+  created() {
     // 初始化加载数据
     this.getMenuList()
+    this.navState = window.sessionStorage.getItem('activePath')
+    console.log(this.navState)
   },
   methods: {
     logout() {
@@ -76,14 +75,19 @@ export default {
       this.$router.push('/login')
     },
     async getMenuList() {
-      const { data: res } = await this.$http.get('menus')
-      if (res.status !== 200) return this.$message.error(res.msg)
+      const { data: res } = await this.$http.get('/menu/menuList')
+
+      if (res.code !== 200) return this.$message.error(res.msg)
       this.menuList = res.data
       console.log(res)
     },
     // 左侧菜单的折叠和展开
     toggleBtn() {
       this.isCollapse = !this.isCollapse
+    },
+    saveNavState(activePath) {
+      this.navState = activePath
+      window.sessionStorage.setItem('activePath',activePath)
     }
   }
 }
@@ -114,6 +118,9 @@ export default {
     background-color: #333744;
     .el-menu {
       border: 0;
+    }
+    .el-submenu__title span {
+      margin-left: 10px;
     }
   }
   .el-main {
