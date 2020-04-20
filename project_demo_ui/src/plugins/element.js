@@ -22,7 +22,9 @@ import {
     TableColumn,
     Switch,
     Tooltip,
-    Dialog
+    Dialog,
+    MessageBox,
+    Tag
 } from 'element-ui'
 Vue.use(Button)
 Vue.use(Form)
@@ -46,5 +48,7 @@ Vue.use(TableColumn)
 Vue.use(Switch)
 Vue.use(Tooltip)
 Vue.use(Dialog)
-// 对message 进行全局挂载
+Vue.use(Tag)
+// 进行全局挂载
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm

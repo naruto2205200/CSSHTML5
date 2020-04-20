@@ -24,9 +24,9 @@
       </el-row>
       <el-table :data="userList" border style="width: 100%">
         <el-table-column type="index" label="#"></el-table-column>
-        <el-table-column prop="id" label="编号" width="180"></el-table-column>
+        <el-table-column prop="id" label="编号" width="60"></el-table-column>
         <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-        <el-table-column prop="age" label="年龄" width="180"></el-table-column>
+        <el-table-column prop="age" label="年龄" width="80"></el-table-column>
         <el-table-column prop="email" label="邮箱" width="180"></el-table-column>
         <el-table-column prop="mobile" label="联系方式" width="180"></el-table-column>
         <el-table-column prop="createTime" label="创建时间" width="180"></el-table-column>
@@ -42,12 +42,22 @@
           </template>
         </el-table-column>
         <el-table-column label="操作">
-          <template>
+          <template slot-scope="scope">
             <el-tooltip class="item" effect="dark" content="编辑" placement="top" :enterable="false">
-              <el-button type="primary" icon="el-icon-edit" size="mini"></el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-edit"
+                size="mini"
+                @click="showEditDialog(scope.row.id)"
+              ></el-button>
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="删除" placement="top" :enterable="false">
-              <el-button type="warning" icon="el-icon-delete" size="mini"></el-button>
+              <el-button
+                type="warning"
+                icon="el-icon-delete"
+                size="mini"
+                @click="removeUserById(scope.row.id)"
+              ></el-button>
             </el-tooltip>
             <el-tooltip
               class="item"
@@ -62,10 +72,10 @@
         </el-table-column>
       </el-table>
     </el-card>
-    <el-dialog title="提示" :visible.sync="addDialogVisible" width="30%" @close="addDialogClosed">
+    <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="30%" @close="addDialogClosed">
       <el-form ref="addFormRef" :rules="addFormRules" :model="addForm" label-width="80px">
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="addForm.username"></el-input>
+        <el-form-item label="用户名" prop="name">
+          <el-input v-model="addForm.name"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input type="password" v-model="addForm.password"></el-input>
@@ -83,6 +93,24 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible=false">取 消</el-button>
         <el-button type="primary" @click="addUser">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog title="编辑用户" :visible.sync="editDialogVisible" width="30%" @close="editDialogClosed">
+      <el-form ref="editFormRef" :model="editForm" :rules="editFormRules" label-width="80px">
+        <el-form-item label="用户名">
+          <el-input v-model="editForm.name" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="editForm.email"></el-input>
+        </el-form-item>
+        <el-form-item label="手机" prop="mobile">
+          <el-input v-model="editForm.mobile"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editUserInfo">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -108,10 +136,9 @@ export default {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
-      }else if(value.length<6 || value.length>15){
-          callback(new Error('密码长度在 6 到 15 个字符'))
-      } 
-      else {
+      } else if (value.length < 6 || value.length > 15) {
+        callback(new Error('密码长度在 6 到 15 个字符'))
+      } else {
         if (this.addForm.checkPass !== '') {
           this.$refs.addForm.validateField('checkPass')
         }
@@ -134,7 +161,7 @@ export default {
       addDialogVisible: false,
       //   添加用户信息
       addForm: {
-        username: '',
+        name: '',
         password: '',
         checkPass: '',
         email: '',
@@ -142,14 +169,26 @@ export default {
       },
       //   添加用户验证规则
       addFormRules: {
-        username: [
+        name: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
           { min: 8, max: 15, message: '长度在 8 到 15 个字符', trigger: 'blur' }
         ],
-        password: [{  required: true,validator: validatePass, trigger: 'blur' }],
-        checkPass: [{  required: true,validator: validatePass2, trigger: 'blur' }],
-        email: [{  required: true,validator: checkEmail, trigger: 'blur' }],
-        mobile: [{  required: true,validator: checkMobile, trigger: 'blur' }]
+        password: [
+          { required: true, validator: validatePass, trigger: 'blur' }
+        ],
+        checkPass: [
+          { required: true, validator: validatePass2, trigger: 'blur' }
+        ],
+        email: [{ required: true, validator: checkEmail, trigger: 'blur' }],
+        mobile: [{ required: true, validator: checkMobile, trigger: 'blur' }]
+      },
+      // 控制编辑用户对话框的显示与隐藏
+      editDialogVisible: false,
+      // 查询到的用户信息
+      editForm: {},
+      editFormRules: {
+        email: [{ required: true, validator: checkEmail, trigger: 'blur' }],
+        mobile: [{ required: true, validator: checkMobile, trigger: 'blur' }]
       }
     }
   },
@@ -179,21 +218,68 @@ export default {
       this.$message.success('更新用户状态成功')
     },
     addDialogClosed() {
-        this.$refs.addFormRef.resetFields();
+      this.$refs.addFormRef.resetFields()
     },
     addUser() {
-        this.$refs.addFormRef.validate(valid =>{
-            console.log(valid)
-            if(!valid) return;
-            // 进行添加请求
-            const {data:res} = this.$http.post('users/add',this.addForm);
-            if(res.code!==200){
-                this.$message.error('添加失败')
-            }
-            this.$message.success('添加成功');
-            this.addDialogVisible = false;
-            this.getUserList();
-        })
+      this.$refs.addFormRef.validate(async valid => {
+        if (!valid) return
+        // 进行添加请求
+        const { data: res } = await this.$http.post('user/edit', this.addForm)
+        if (res.code !== 200) {
+          this.$message.error('添加失败')
+        }
+        this.$message.success('添加成功')
+        this.addDialogVisible = false
+        this.getUserList()
+      })
+    },
+    // 展示编辑用户对话框
+    async showEditDialog(id) {
+      const { data: res } = await this.$http.get('/user/getUser/' + id)
+      if (res.code !== 200) {
+        return this.$message.error('查询失败')
+      }
+      this.editDialogVisible = true
+      this.editForm = res.data
+    },
+    // 重置编辑弹出框
+    editDialogClosed() {
+      this.$refs.editFormRef.resetFields()
+    },
+    editUserInfo() {
+      this.$refs.editFormRef.validate(async valid => {
+        if (!valid) return
+        // 进行添加请求
+        const { data: res } = await this.$http.post('/user/edit', this.editForm)
+        if (res.code !== 200) {
+          return this.$message.error('编辑失败')
+        }
+        this.$message.success('编辑成功')
+        this.editDialogVisible = false
+        this.getUserList()
+      })
+    },
+    async removeUserById(id) {
+      // confirm 返回值是一个字符串
+      const result = await this.$confirm(
+        '此操作将永久删除该用户, 是否继续?',
+        '提示',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+      ).catch(err => err)
+
+      if (result !== 'confirm') {
+        return this.$message.info('以取消删除')
+      }
+      // return this.$message.success('以确定删除')
+      const { data: res } = await this.$http.delete('/user/delete' + id)
+      if (res.code !== 200) {
+        return this.$message.error('删除失败')
+      }
+      return this.$message.success('删除成功')
     }
   }
 }
